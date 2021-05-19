@@ -3,4 +3,14 @@
     <string name="title_home">课程表</string>
     <string name="title_gadget">小工具</string>
     <string name="title_message">信息</string>
+
+    <string-array name="days">
+        <item>星期一</item>
+        <item>星期二</item>
+        <item>星期三</item>
+        <item>星期四</item>
+        <item>星期五</item>
+        <item>星期六</item>
+        <item>星期七</item>
+    </string-array>
 </resources>
