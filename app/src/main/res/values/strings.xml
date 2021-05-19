@@ -11,6 +11,21 @@
         <item>星期四</item>
         <item>星期五</item>
         <item>星期六</item>
-        <item>星期七</item>
+        <item>星期日</item>
     </string-array>
+
+    <string-array name="cases">
+        <item>第一大节</item>
+        <item>第二大节</item>
+        <item>第三大节</item>
+        <item>第四大节</item>
+        <item>第五大节</item>
+        <item>第六大节</item>
+        <item>第七大节</item>
+        <item>第八大节</item>
+        <item>第九大节</item>
+        <item>第十大节</item>
+    </string-array>
+
+
 </resources>
