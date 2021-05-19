@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="day1" type="id"/>
+    <item name="day2" type="id"/>
+    <item name="day3" type="id"/>
+    <item name="day4" type="id"/>
+    <item name="day5" type="id"/>
+    <item name="day6" type="id"/>
+    <item name="day7" type="id"/>
+
+    <item name="case1" type="id"/>
+    <item name="case2" type="id"/>
+    <item name="case3" type="id"/>
+    <item name="case4" type="id"/>
+    <item name="case5" type="id"/>
+    <item name="case6" type="id"/>
+    <item name="case7" type="id"/>
+    <item name="case8" type="id"/>
+</resources>

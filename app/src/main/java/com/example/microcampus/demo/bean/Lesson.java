@@ -7,11 +7,11 @@ public class Lesson {
     private String teacherName;
     private String lessonCATS;
     private String lessonAttibution;
-    private Date lessonDate;
+    private String lessonDate;
     private String place;
     private int day;
 
-    public Lesson(String lessonName, String teacherName, String lessonCATS, String lessonAttibution, Date lessonDate, String place) {
+    public Lesson(String lessonName, String teacherName, String lessonCATS, String lessonAttibution, String lessonDate, String place) {
         this.lessonName = lessonName;
         this.teacherName = teacherName;
         this.lessonCATS = lessonCATS;
@@ -52,11 +52,24 @@ public class Lesson {
         this.lessonAttibution = lessonAttibution;
     }
 
-    public Date getLessonDate() {
+    public String getLessonDate() {
         return lessonDate;
     }
 
-    public void setLessonDate(Date lessonDate) {
+    @Override
+    public String toString() {
+        return "Lesson{" +
+                "lessonName='" + lessonName + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                ", lessonCATS='" + lessonCATS + '\'' +
+                ", lessonAttibution='" + lessonAttibution + '\'' +
+                ", lessonDate='" + lessonDate + '\'' +
+                ", place='" + place + '\'' +
+                ", day=" + day +
+                '}';
+    }
+
+    public void setLessonDate(String lessonDate) {
         this.lessonDate = lessonDate;
     }
 
