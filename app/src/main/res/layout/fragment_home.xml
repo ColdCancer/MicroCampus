@@ -4,41 +4,272 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".ui.home.HomeFragment">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="@dimen/schedule_section_width"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/schedule_day_height"
+            android:layout_marginHorizontal="1dp"
+            android:padding="1dp"
+            android:gravity="center"
+            android:textSize="@dimen/schedule_day_size"
+            android:background="#aabbccdd"
+            android:text="@string/str_day1"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/schedule_day_height"
+            android:layout_marginHorizontal="1dp"
+            android:padding="1dp"
+            android:gravity="center"
+            android:textSize="@dimen/schedule_day_size"
+            android:background="#aabbccdd"
+            android:text="@string/str_day2"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/schedule_day_height"
+            android:layout_marginHorizontal="1dp"
+            android:padding="1dp"
+            android:gravity="center"
+            android:textSize="@dimen/schedule_day_size"
+            android:background="#aabbccdd"
+            android:text="@string/str_day3"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/schedule_day_height"
+            android:layout_marginHorizontal="1dp"
+            android:padding="1dp"
+            android:gravity="center"
+            android:textSize="@dimen/schedule_day_size"
+            android:background="#aabbccdd"
+            android:text="@string/str_day4"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/schedule_day_height"
+            android:layout_marginHorizontal="1dp"
+            android:padding="1dp"
+            android:gravity="center"
+            android:textSize="@dimen/schedule_day_size"
+            android:background="#aabbccdd"
+            android:text="@string/str_day5"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/schedule_day_height"
+            android:layout_marginHorizontal="1dp"
+            android:padding="1dp"
+            android:gravity="center"
+            android:textSize="@dimen/schedule_day_size"
+            android:background="#aabbccdd"
+            android:text="@string/str_day6"/>
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="@dimen/schedule_day_height"
+            android:layout_marginHorizontal="1dp"
+            android:padding="1dp"
+            android:gravity="center"
+            android:textSize="@dimen/schedule_day_size"
+            android:background="#aabbccdd"
+            android:text="@string/str_day7"/>
+
+    </LinearLayout>
 
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <HorizontalScrollView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+
+        <LinearLayout
+            android:id="@+id/schedule_main"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <LinearLayout
+                android:id="@+id/schedule_sections"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical">
+
+                <TextView
+                    android:id="@+id/section1"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:background="#bbccaa"
+                    android:text="@string/str_section1"/>
+
+                <TextView
+                    android:id="@+id/section2"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:background="#bbccaa"
+                    android:text="@string/str_section2"/>
+
+                <TextView
+                    android:id="@+id/section3"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:background="#bbccaa"
+                    android:text="@string/str_section3"/>
+
+                <TextView
+                    android:id="@+id/section4"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:background="#bbccaa"
+                    android:text="@string/str_section4"/>
+
+                <TextView
+                    android:id="@+id/section5"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:background="#bbccaa"
+                    android:text="@string/str_section5"/>
+
+                <TextView
+                    android:id="@+id/section6"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:background="#bbccaa"
+                    android:text="@string/str_section6"/>
+
+                <TextView
+                    android:id="@+id/section7"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:background="#bbccaa"
+                    android:text="@string/str_section7"/>
+
+                <TextView
+                    android:id="@+id/section8"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="18sp"
+                    android:background="#bbccaa"
+                    android:text="@string/str_section8"/>
+
+            </LinearLayout>
 
             <RelativeLayout
-                android:id="@+id/schedule_main"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content">
-
-                <LinearLayout
-                    android:id="@+id/schedule_col"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal"
-                    android:layout_marginLeft="28dp">
-
-                </LinearLayout>
-
-                <LinearLayout
-                    android:id="@+id/schedule_row"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:orientation="vertical"
-                    android:layout_marginTop="28dp">
-                </LinearLayout>
-
-
+                android:id="@+id/schedule_day1"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="1dp"
+                android:padding="1dp">
             </RelativeLayout>
 
-        </HorizontalScrollView>
+            <RelativeLayout
+                android:id="@+id/schedule_day2"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="1dp"
+                android:padding="1dp">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/schedule_day3"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="1dp"
+                android:padding="1dp">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/schedule_day4"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="1dp"
+                android:padding="1dp">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/schedule_day5"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="1dp"
+                android:padding="1dp">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/schedule_day6"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="1dp"
+                android:padding="1dp">
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:id="@+id/schedule_day7"
+                android:layout_width="0dp"
+                android:layout_weight="1"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:layout_marginHorizontal="1dp"
+                android:padding="1dp">
+            </RelativeLayout>
+
+        </LinearLayout>
+
     </ScrollView>
 
 </LinearLayout>

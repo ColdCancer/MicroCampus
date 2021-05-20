@@ -18,7 +18,6 @@ public class HomeViewModel extends ViewModel {
     public HomeViewModel() {
         mText = new MutableLiveData<>();
         mLessons = new MutableLiveData<>();
-        Log.i("debug", "start");
     }
 
     public void setmLessons(MutableLiveData<List<Lesson>> mLessons) {

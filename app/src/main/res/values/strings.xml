@@ -4,28 +4,25 @@
     <string name="title_gadget">小工具</string>
     <string name="title_message">信息</string>
 
-    <string-array name="days">
-        <item>星期一</item>
-        <item>星期二</item>
-        <item>星期三</item>
-        <item>星期四</item>
-        <item>星期五</item>
-        <item>星期六</item>
-        <item>星期日</item>
-    </string-array>
 
-    <string-array name="cases">
-        <item>第一大节</item>
-        <item>第二大节</item>
-        <item>第三大节</item>
-        <item>第四大节</item>
-        <item>第五大节</item>
-        <item>第六大节</item>
-        <item>第七大节</item>
-        <item>第八大节</item>
-        <item>第九大节</item>
-        <item>第十大节</item>
-    </string-array>
+    <string name="str_day1">周一</string>
+    <string name="str_day2">周二</string>
+    <string name="str_day3">周三</string>
+    <string name="str_day4">周四</string>
+    <string name="str_day5">周五</string>
+    <string name="str_day6">周六</string>
+    <string name="str_day7">周日</string>
+
+    <string name="str_section1">1</string>
+    <string name="str_section2">2</string>
+    <string name="str_section3">3</string>
+    <string name="str_section4">4</string>
+    <string name="str_section5">5</string>
+    <string name="str_section6">6</string>
+    <string name="str_section7">7</string>
+    <string name="str_section8">8</string>
+    <string name="str_section9">9</string>
+    <string name="str_section10">10</string>
 
 
 </resources>

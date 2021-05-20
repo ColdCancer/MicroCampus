@@ -7,17 +7,39 @@ public class Lesson {
     private String teacherName;
     private String lessonCATS;
     private String lessonAttibution;
-    private String lessonDate;
-    private String place;
+    private int week;
     private int day;
+    private int beginTime;
+    private int endTime;
+    private String place;
 
-    public Lesson(String lessonName, String teacherName, String lessonCATS, String lessonAttibution, String lessonDate, String place) {
+    public Lesson(String lessonName, String teacherName, String lessonCATS, String lessonAttibution, int week, int day, int beginTime, int endTime, String place) {
         this.lessonName = lessonName;
         this.teacherName = teacherName;
         this.lessonCATS = lessonCATS;
         this.lessonAttibution = lessonAttibution;
-        this.lessonDate = lessonDate;
+        this.week = week;
+        this.day = day;
+        this.beginTime = beginTime;
+        this.endTime = endTime;
         this.place = place;
+    }
+
+    public Lesson() { }
+
+    @Override
+    public String toString() {
+        return "Lesson{" +
+                "lessonName='" + lessonName + '\'' +
+                ", teacherName='" + teacherName + '\'' +
+                ", lessonCATS='" + lessonCATS + '\'' +
+                ", lessonAttibution='" + lessonAttibution + '\'' +
+                ", week=" + week +
+                ", day=" + day +
+                ", beginTime=" + beginTime +
+                ", endTime=" + endTime +
+                ", place='" + place + '\'' +
+                '}';
     }
 
     public String getLessonName() {
@@ -52,33 +74,12 @@ public class Lesson {
         this.lessonAttibution = lessonAttibution;
     }
 
-    public String getLessonDate() {
-        return lessonDate;
+    public int getWeek() {
+        return week;
     }
 
-    @Override
-    public String toString() {
-        return "Lesson{" +
-                "lessonName='" + lessonName + '\'' +
-                ", teacherName='" + teacherName + '\'' +
-                ", lessonCATS='" + lessonCATS + '\'' +
-                ", lessonAttibution='" + lessonAttibution + '\'' +
-                ", lessonDate='" + lessonDate + '\'' +
-                ", place='" + place + '\'' +
-                ", day=" + day +
-                '}';
-    }
-
-    public void setLessonDate(String lessonDate) {
-        this.lessonDate = lessonDate;
-    }
-
-    public String getPlace() {
-        return place;
-    }
-
-    public void setPlace(String place) {
-        this.place = place;
+    public void setWeek(int week) {
+        this.week = week;
     }
 
     public int getDay() {
@@ -87,5 +88,29 @@ public class Lesson {
 
     public void setDay(int day) {
         this.day = day;
+    }
+
+    public int getBeginTime() {
+        return beginTime;
+    }
+
+    public void setBeginTime(int beginTime) {
+        this.beginTime = beginTime;
+    }
+
+    public int getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(int endTime) {
+        this.endTime = endTime;
+    }
+
+    public String getPlace() {
+        return place;
+    }
+
+    public void setPlace(String place) {
+        this.place = place;
     }
 }
