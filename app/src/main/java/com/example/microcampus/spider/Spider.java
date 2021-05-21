@@ -20,7 +20,6 @@ public class Spider {
 
     public boolean login(String account, String password, String code) {
         init(account, password);
-
         return false;
     }
 
