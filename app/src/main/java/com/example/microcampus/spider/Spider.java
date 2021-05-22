@@ -9,6 +9,8 @@ import java.util.List;
 // Can't use multiple thread
 public class Spider {
 
+    public Spider() {}
+
     public Spider(String account, String password) {
         init(account, password);
     }
@@ -18,7 +20,7 @@ public class Spider {
         SpiderSession.password = password;
     }
 
-    public boolean login(String account, String password, String code) {
+    public boolean login(String account, String password) {
         init(account, password);
         return false;
     }
@@ -28,5 +30,9 @@ public class Spider {
         // add lesson
 
         return lessons;
+    }
+
+    public List<Lesson> getOneWeekLessonsByDate(Date date) {
+        return null;
     }
 }

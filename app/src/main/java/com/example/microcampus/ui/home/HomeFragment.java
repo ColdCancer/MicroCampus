@@ -24,6 +24,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.microcampus.MainActivity;
 import com.example.microcampus.R;
 import com.example.microcampus.demo.bean.Lesson;
+import com.example.microcampus.demo.dao.ScheduleDAO;
+import com.example.microcampus.demo.dao.impl.ScheduleDAOImpl;
 import com.example.microcampus.spider.Spider;
 
 import org.w3c.dom.Text;
@@ -33,21 +35,24 @@ import java.util.List;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
-
-    private HomeViewModel homeViewModel;
-    private View root;
-
     private float ITEM_HEIGHT;
     private float NORM_DIP;
     private final int DAY = 7;
 
+    private HomeViewModel homeViewModel;
+    private View root;
+
     private RelativeLayout[] schedule_days;
     private int[] schedule_day_ids = {R.id.schedule_day1, R.id.schedule_day2, R.id.schedule_day3,
             R.id.schedule_day4, R.id.schedule_day5, R.id.schedule_day6, R.id.schedule_day7};
+
+//    private ScheduleDAO scheduleDAO;
+
 //    private int[] schedule_section_ids = {R.id.section1, R.id.section2, R.id.section3, R.id.section4,
 //            R.id.section5, R.id.section6, R.id.section7, R.id.section8};
 
 //    private MutableLiveData<List<Lesson>> mLessons;
+    private MutableLiveData<Integer> mCount;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
@@ -57,46 +62,53 @@ public class HomeFragment extends Fragment {
 //        mLessons = homeViewModel.getLessons();
 
         init();
-        tryUpdate(homeViewModel);
 
-        homeViewModel.getLessons().observe(getViewLifecycleOwner(), new Observer<List<Lesson>>() {
+        homeViewModel.StartToAddOne(); // The first launch to update lessons
+        if (Objects.equals(homeViewModel.getmCount().getValue(), 1)) {
+            homeViewModel.updateLessons(Objects.requireNonNull(getActivity()));
+        }
+
+        homeViewModel.getmLessons().observe(getViewLifecycleOwner(), new Observer<List<Lesson>>() {
             @Override
             public void onChanged(final List<Lesson> lessons) {
-                Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+                new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        for (int i = 0; i < lessons.size(); i++) {
-                            Lesson lesson = lessons.get(i);
-
-                            int begin = getBeginPositionByTime(lesson.getBeginTime());
-                            int end = getEndPositionByTime(lesson.getEndTime());
-
-                            View item = inflater.inflate(R.layout.schedule_item, null, false);
-                            TextView textView = item.findViewById(R.id.lesson);
-                            textView.setText(lesson.toString());
-
-                            RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
-                                    ViewGroup.LayoutParams.MATCH_PARENT, end - begin);
-                            layoutParams.topMargin = begin;
-                            schedule_days[lesson.getDay() - 1].addView(item, layoutParams);
+                        try {
+                            Thread.sleep(1000);
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
                         }
+                        Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                for (int i = 0; i < lessons.size(); i++) {
+                                    Lesson lesson = lessons.get(i);
+                                    int begin = getBeginPositionByTime(lesson.getBeginTime());
+                                    int end = getEndPositionByTime(lesson.getEndTime());
+
+                                    View item = inflater.inflate(R.layout.schedule_item, null, false);
+                                    TextView textView = item.findViewById(R.id.lesson);
+                                    textView.setText(lesson.toString());
+
+                                    RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
+                                            ViewGroup.LayoutParams.MATCH_PARENT, end - begin);
+                                    layoutParams.topMargin = begin;
+                                    schedule_days[lesson.getDay() - 1].addView(item, layoutParams);
+                                }
+                            }
+                        });
                     }
-                });
+                }).start();
             }
         });
 
         return root;
     }
 
-    private void tryUpdate(HomeViewModel homeViewModel) {
-        SharedPreferences sharedPreferences = Objects.requireNonNull(getActivity()).getSharedPreferences("userInform", Context.MODE_PRIVATE);
-        String account = sharedPreferences.getString("account", "");
-        String password = sharedPreferences.getString("password", "");
-        Spider spider = new Spider(account, password);
-        // TODO: 2021/5/20 Spider Thread for geting lesson information
-    }
 
     private void init() {
+//        scheduleDAO = new ScheduleDAOImpl();
         ITEM_HEIGHT = getResources().getDimensionPixelSize(R.dimen.schedule_section_height);
         NORM_DIP = getResources().getDimensionPixelSize(R.dimen.norm_dp);
         schedule_days = new RelativeLayout[DAY];
