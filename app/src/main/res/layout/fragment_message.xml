@@ -1,22 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".ui.message.MessageFragment">
 
-    <TextView
-        android:id="@+id/text_notifications"
+    <Button
+        android:id="@+id/login"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:textAlignment="center"
-        android:textSize="20sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-</androidx.constraintlayout.widget.ConstraintLayout>
+        android:layout_marginVertical="@dimen/message_item_interval"
+        android:layout_marginHorizontal="@dimen/message_button_margin"
+        android:layout_centerHorizontal="true"
+        android:layout_centerVertical="true"
+        android:text="登录账号"
+        android:textSize="@dimen/message_button_size"/>
+
+
+    <LinearLayout
+        android:id="@+id/message_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical">
+
+        <ImageView
+            android:layout_width="@dimen/message_image_width"
+            android:layout_height="@dimen/message_image_height"
+            android:src="@mipmap/ic_launcher"
+            android:layout_gravity="center"
+            android:scaleType="fitXY"
+            android:layout_marginBottom="@dimen/message_item_interval"/>
+
+        <TextView
+            android:id="@+id/message_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/message_item_interval"
+            android:text="姓名：嗷嗷嗷"
+            android:textSize="@dimen/message_item_size"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/message_id"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/message_item_interval"
+            android:text="学号：201820800199"
+            android:textSize="@dimen/message_item_size"
+            android:gravity="center"/>
+
+        <TextView
+            android:id="@+id/message_faculty"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="@dimen/message_item_interval"
+            android:text="学院：信息工程学院"
+            android:textSize="@dimen/message_item_size"
+            android:gravity="center"/>
+
+        <Button
+            android:id="@+id/logout"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/message_item_interval"
+            android:layout_marginHorizontal="@dimen/message_button_margin"
+            android:text="注销账号"
+            android:textSize="@dimen/message_button_size"/>
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="@dimen/message_item_interval"
+        android:layout_alignParentBottom="true"
+        android:gravity="center"
+        android:text="By: Svipvm - @2021"
+        android:textSize="@dimen/message_about_size" />
+
+</RelativeLayout>
