@@ -7,39 +7,29 @@ public class Lesson {
     private String teacherName;
     private String lessonCATS;
     private String lessonAttibution;
-    private int week;
+    private int month;
     private int day;
+    private int week;
+    private int xDay;
     private int beginTime;
     private int endTime;
     private String place;
 
-    public Lesson(String lessonName, String teacherName, String lessonCATS, String lessonAttibution, int week, int day, int beginTime, int endTime, String place) {
+    public Lesson() { }
+
+    public Lesson(String lessonName, String teacherName, String lessonCATS, String lessonAttibution,
+                  int month, int day, int week, int xDay, int beginTime, int endTime, String place) {
         this.lessonName = lessonName;
         this.teacherName = teacherName;
         this.lessonCATS = lessonCATS;
         this.lessonAttibution = lessonAttibution;
-        this.week = week;
+        this.month = month;
         this.day = day;
+        this.week = week;
+        this.xDay = xDay;
         this.beginTime = beginTime;
         this.endTime = endTime;
         this.place = place;
-    }
-
-    public Lesson() { }
-
-    @Override
-    public String toString() {
-        return "Lesson{" +
-                "lessonName='" + lessonName + '\'' +
-                ", teacherName='" + teacherName + '\'' +
-                ", lessonCATS='" + lessonCATS + '\'' +
-                ", lessonAttibution='" + lessonAttibution + '\'' +
-                ", week=" + week +
-                ", day=" + day +
-                ", beginTime=" + beginTime +
-                ", endTime=" + endTime +
-                ", place='" + place + '\'' +
-                '}';
     }
 
     public String getLessonName() {
@@ -74,12 +64,12 @@ public class Lesson {
         this.lessonAttibution = lessonAttibution;
     }
 
-    public int getWeek() {
-        return week;
+    public int getMonth() {
+        return month;
     }
 
-    public void setWeek(int week) {
-        this.week = week;
+    public void setMonth(int month) {
+        this.month = month;
     }
 
     public int getDay() {
@@ -88,6 +78,22 @@ public class Lesson {
 
     public void setDay(int day) {
         this.day = day;
+    }
+
+    public int getWeek() {
+        return week;
+    }
+
+    public void setWeek(int week) {
+        this.week = week;
+    }
+
+    public int getxDay() {
+        return xDay;
+    }
+
+    public void setxDay(int xDay) {
+        this.xDay = xDay;
     }
 
     public int getBeginTime() {

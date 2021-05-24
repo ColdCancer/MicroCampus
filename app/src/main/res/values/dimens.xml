@@ -5,9 +5,17 @@
 
     <dimen name="norm_dp">1dp</dimen>
 
-    <dimen name="schedule_section_width">18dp</dimen>
-    <dimen name="schedule_section_height">90dp</dimen>
+    <dimen name="schedule_spinner_height">36dp</dimen>
+    <dimen name="schedule_spinner_size">16sp</dimen>
 
-    <dimen name="schedule_day_height">28dp</dimen>
-    <dimen name="schedule_day_size">14sp</dimen>
+    <dimen name="schedule_section_width">16dp</dimen>
+    <dimen name="schedule_section_height">60dp</dimen>
+    <dimen name="schedule_section_size">12sp</dimen>
+
+    <dimen name="schedule_day_height">36dp</dimen>
+    <dimen name="schedule_day_size">12sp</dimen>
+
+    <dimen name="schedule_item_name_size">14sp</dimen>
+    <dimen name="schedule_item_message_size">12sp</dimen>
+    <dimen name="schedule_item_padding">15dp</dimen>
 </resources>

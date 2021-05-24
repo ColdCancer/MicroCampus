@@ -23,6 +23,31 @@
     <string name="str_section8">8</string>
     <string name="str_section9">9</string>
     <string name="str_section10">10</string>
+    <string name="str_section11">11</string>
+    <string name="str_section12">12</string>
 
+    <string-array name="array_week">
+        <item>第 一 周</item>
+        <item>第 二 周</item>
+        <item>第 三 周</item>
+        <item>第 四 周</item>
+        <item>第 五 周</item>
+        <item>第 六 周</item>
+        <item>第 七 周</item>
+        <item>第 八 周</item>
+        <item>第 九 周</item>
+        <item>第 十 周</item>
+        <item>第十一周</item>
+        <item>第十二周</item>
+        <item>第十三周</item>
+        <item>第十四周</item>
+        <item>第十五周</item>
+        <item>第十六周</item>
+        <item>第十七周</item>
+        <item>第十八周</item>
+        <item>第十九周</item>
+        <item>第二十周</item>
+    </string-array>
+    <string name="week_tip">请选择课程周</string>
 
 </resources>

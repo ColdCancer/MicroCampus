@@ -8,12 +8,48 @@
     tools:context=".ui.home.HomeFragment">
 
     <LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="@dimen/schedule_spinner_height"
+        android:orientation="horizontal"
+        android:layout_gravity="center">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/schedule_spinner_height"
+            android:layout_marginHorizontal="3dp"
+            android:gravity="center"
+            android:text="正在查看"
+            android:textSize="@dimen/schedule_spinner_size"/>
+
+        <Spinner
+            android:id="@+id/schedule_option"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/schedule_spinner_height"
+            android:textAlignment="center"
+            android:background="@null"
+            android:entries="@array/array_week"
+            android:spinnerMode="dialog"
+            android:prompt="@string/week_tip"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/schedule_spinner_height"
+            android:layout_marginHorizontal="3dp"
+            android:gravity="center"
+            android:text="的课程安排"
+            android:textSize="@dimen/schedule_spinner_size"/>
+
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:paddingLeft="@dimen/schedule_section_width"
+        android:background="#FBAC94"
         android:orientation="horizontal">
 
         <TextView
+            android:id="@+id/schedule_tip1"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/schedule_day_height"
@@ -25,6 +61,7 @@
             android:text="@string/str_day1"/>
 
         <TextView
+            android:id="@+id/schedule_tip2"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/schedule_day_height"
@@ -36,6 +73,7 @@
             android:text="@string/str_day2"/>
 
         <TextView
+            android:id="@+id/schedule_tip3"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/schedule_day_height"
@@ -47,6 +85,7 @@
             android:text="@string/str_day3"/>
 
         <TextView
+            android:id="@+id/schedule_tip4"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/schedule_day_height"
@@ -58,6 +97,7 @@
             android:text="@string/str_day4"/>
 
         <TextView
+            android:id="@+id/schedule_tip5"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/schedule_day_height"
@@ -69,6 +109,7 @@
             android:text="@string/str_day5"/>
 
         <TextView
+            android:id="@+id/schedule_tip6"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/schedule_day_height"
@@ -80,6 +121,7 @@
             android:text="@string/str_day6"/>
 
         <TextView
+            android:id="@+id/schedule_tip7"
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="@dimen/schedule_day_height"
@@ -106,6 +148,7 @@
                 android:id="@+id/schedule_sections"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:background="#C8B3ED"
                 android:orientation="vertical">
 
                 <TextView
@@ -115,8 +158,8 @@
                     android:layout_marginVertical="1dp"
                     android:padding="1dp"
                     android:gravity="center"
-                    android:textSize="18sp"
-                    android:background="#bbccaa"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
                     android:text="@string/str_section1"/>
 
                 <TextView
@@ -126,8 +169,8 @@
                     android:layout_marginVertical="1dp"
                     android:padding="1dp"
                     android:gravity="center"
-                    android:textSize="18sp"
-                    android:background="#bbccaa"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
                     android:text="@string/str_section2"/>
 
                 <TextView
@@ -137,8 +180,8 @@
                     android:layout_marginVertical="1dp"
                     android:padding="1dp"
                     android:gravity="center"
-                    android:textSize="18sp"
-                    android:background="#bbccaa"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
                     android:text="@string/str_section3"/>
 
                 <TextView
@@ -148,8 +191,8 @@
                     android:layout_marginVertical="1dp"
                     android:padding="1dp"
                     android:gravity="center"
-                    android:textSize="18sp"
-                    android:background="#bbccaa"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
                     android:text="@string/str_section4"/>
 
                 <TextView
@@ -159,8 +202,8 @@
                     android:layout_marginVertical="1dp"
                     android:padding="1dp"
                     android:gravity="center"
-                    android:textSize="18sp"
-                    android:background="#bbccaa"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
                     android:text="@string/str_section5"/>
 
                 <TextView
@@ -170,8 +213,8 @@
                     android:layout_marginVertical="1dp"
                     android:padding="1dp"
                     android:gravity="center"
-                    android:textSize="18sp"
-                    android:background="#bbccaa"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
                     android:text="@string/str_section6"/>
 
                 <TextView
@@ -181,8 +224,8 @@
                     android:layout_marginVertical="1dp"
                     android:padding="1dp"
                     android:gravity="center"
-                    android:textSize="18sp"
-                    android:background="#bbccaa"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
                     android:text="@string/str_section7"/>
 
                 <TextView
@@ -192,10 +235,53 @@
                     android:layout_marginVertical="1dp"
                     android:padding="1dp"
                     android:gravity="center"
-                    android:textSize="18sp"
-                    android:background="#bbccaa"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
                     android:text="@string/str_section8"/>
 
+                <TextView
+                    android:id="@+id/section9"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
+                    android:text="@string/str_section9"/>
+
+                <TextView
+                    android:id="@+id/section10"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
+                    android:text="@string/str_section10"/>
+
+                <TextView
+                    android:id="@+id/section11"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
+                    android:text="@string/str_section11"/>
+
+                <TextView
+                    android:id="@+id/section12"
+                    android:layout_width="@dimen/schedule_section_width"
+                    android:layout_height="@dimen/schedule_section_height"
+                    android:layout_marginVertical="1dp"
+                    android:padding="1dp"
+                    android:gravity="center"
+                    android:textSize="@dimen/schedule_section_size"
+                    android:background="@color/schedule_section_color"
+                    android:text="@string/str_section12"/>
             </LinearLayout>
 
             <RelativeLayout
@@ -204,8 +290,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginHorizontal="1dp"
-                android:padding="1dp">
+                android:layout_margin="1dp">
             </RelativeLayout>
 
             <RelativeLayout
@@ -214,8 +299,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginHorizontal="1dp"
-                android:padding="1dp">
+                android:layout_margin="1dp">
             </RelativeLayout>
 
             <RelativeLayout
@@ -224,8 +308,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginHorizontal="1dp"
-                android:padding="1dp">
+                android:layout_margin="1dp">
             </RelativeLayout>
 
             <RelativeLayout
@@ -234,8 +317,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginHorizontal="1dp"
-                android:padding="1dp">
+                android:layout_margin="1dp">
             </RelativeLayout>
 
             <RelativeLayout
@@ -244,8 +326,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginHorizontal="1dp"
-                android:padding="1dp">
+                android:layout_margin="1dp">
             </RelativeLayout>
 
             <RelativeLayout
@@ -254,8 +335,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginHorizontal="1dp"
-                android:padding="1dp">
+                android:layout_margin="1dp">
             </RelativeLayout>
 
             <RelativeLayout
@@ -264,8 +344,7 @@
                 android:layout_weight="1"
                 android:layout_height="match_parent"
                 android:orientation="vertical"
-                android:layout_marginHorizontal="1dp"
-                android:padding="1dp">
+                android:layout_margin="1dp">
             </RelativeLayout>
 
         </LinearLayout>
