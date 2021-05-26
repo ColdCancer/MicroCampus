@@ -29,4 +29,8 @@
     <dimen name="message_about_size">14sp</dimen>
 <!--    <dimen name="message_item_internal">4dp</dimen>-->
 
+    <dimen name="login_item_margin">20dp</dimen>
+    <dimen name="login_item_height">42dp</dimen>
+    <dimen name="login_item_size">18sp</dimen>
+
 </resources>

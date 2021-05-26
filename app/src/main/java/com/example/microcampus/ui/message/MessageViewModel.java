@@ -6,14 +6,22 @@ import androidx.lifecycle.ViewModel;
 
 public class MessageViewModel extends ViewModel {
 
-    private MutableLiveData<String> mText;
+    private MutableLiveData<Boolean> mLoginFlag;
+
 
     public MessageViewModel() {
-        mText = new MutableLiveData<>();
-        mText.setValue("This is notifications fragment");
+        mLoginFlag = new MutableLiveData<>(false);
     }
 
-    public LiveData<String> getText() {
-        return mText;
+    public LiveData<Boolean> getLoginFlag() {
+        return mLoginFlag;
+    }
+
+    public void setLoginFlag(boolean flag) {
+        mLoginFlag.setValue(flag);
+    }
+
+    public boolean checkLogin() {
+        return mLoginFlag.getValue();
     }
 }

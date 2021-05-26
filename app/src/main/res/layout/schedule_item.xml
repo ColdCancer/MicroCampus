@@ -4,7 +4,7 @@
     android:layout_width="match_parent"
     android:layout_height="@dimen/schedule_section_height"
     android:orientation="vertical"
-    android:background="#75C3E6">
+    android:background="@color/schedule_item">
 
     <TextView
         android:id="@+id/lesson_name"

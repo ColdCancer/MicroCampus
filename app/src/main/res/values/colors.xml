@@ -5,4 +5,12 @@
     <color name="colorAccent">#03DAC5</color>
 
     <color name="schedule_section_color">#aabbcc</color>
+    
+    <color name="schedule_section_morning">#cceee5</color>
+    <color name="schedule_section_afternoon">#e5eecc</color>
+    <color name="schedule_section_evening">#bbddd4</color>
+    <color name="schedule_background">#ffffff</color>
+    <color name="schedule_day">#77B4E4</color>
+    <color name="schedule_item">#ddbbdd</color>
+
 </resources>

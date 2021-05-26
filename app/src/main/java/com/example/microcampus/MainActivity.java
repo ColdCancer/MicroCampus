@@ -1,15 +1,20 @@
 package com.example.microcampus;
 
+import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.example.microcampus.ui.message.MessageViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.lifecycle.ViewModelProviders;
 import androidx.navigation.NavController;
 import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
@@ -19,6 +24,7 @@ import java.util.Objects;
 import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
+    private MessageViewModel notificationsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -38,6 +44,12 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
+        notificationsViewModel =
+                ViewModelProviders.of(this).get(MessageViewModel.class);
+
+        SharedPreferences sharedPreferences = getSharedPreferences("student", Context.MODE_PRIVATE);
+        boolean autoLoginFlag = sharedPreferences.getBoolean("autoLogin", false);
+        notificationsViewModel.setLoginFlag(autoLoginFlag);
 
     }
 
