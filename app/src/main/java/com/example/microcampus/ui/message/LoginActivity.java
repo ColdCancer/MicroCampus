@@ -17,13 +17,15 @@ import androidx.lifecycle.MutableLiveData;
 
 import com.example.microcampus.MainActivity;
 import com.example.microcampus.R;
+import com.example.microcampus.demo.service.DataService;
+import com.example.microcampus.demo.service.impl.DataServiceImpl;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText username, password;
     private Button login, cancel;
     private CheckBox remember, autoLogin;
-//    private boolean rememberFlag, autoLoginFlag;
-    private MutableLiveData<Boolean> mLoginFlag;
+    private SharedPreferences sharedPreferences;
+    private DataService dataService;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -32,6 +34,11 @@ public class LoginActivity extends AppCompatActivity {
 
         init();
 
+        if (sharedPreferences.getBoolean("remember", false)) {
+            username.setText(sharedPreferences.getString("account", ""));
+            password.requestFocus();
+        }
+
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,9 +46,8 @@ public class LoginActivity extends AppCompatActivity {
                 String strPassword = password.getText().toString();
                 Intent intent = new Intent(LoginActivity.this, MainActivity.class);
 
-                if ("student".equals(strUsername) && "student".equals(strPassword)) {
+                if (dataService.login(strUsername, strPassword)) {
                     // TODO: 2021/5/26 add file save faction
-                    SharedPreferences sharedPreferences = getSharedPreferences("student", Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = sharedPreferences.edit();
                     editor.putString("account", strUsername);
                     editor.putString("password", strPassword);
@@ -59,6 +65,13 @@ public class LoginActivity extends AppCompatActivity {
             }
         });
 
+        cancel.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                setResult(RESULT_CANCELED);
+                finish();
+            }
+        });
     }
 
     @Override
@@ -69,6 +82,8 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init() {
+        sharedPreferences = getSharedPreferences("student", Context.MODE_PRIVATE);
+        dataService = new DataServiceImpl();
         username = (EditText) findViewById(R.id.username);
         password = (EditText) findViewById(R.id.password);
         login = (Button) findViewById(R.id.login);
