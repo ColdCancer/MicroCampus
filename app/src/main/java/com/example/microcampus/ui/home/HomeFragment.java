@@ -24,14 +24,8 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.microcampus.MainActivity;
 import com.example.microcampus.R;
 import com.example.microcampus.demo.bean.Lesson;
-import com.example.microcampus.demo.dao.ScheduleDAO;
-import com.example.microcampus.demo.dao.impl.ScheduleDAOImpl;
 import com.example.microcampus.demo.util.DatabaseHelper;
-import com.example.microcampus.spider.Spider;
 
-import org.w3c.dom.Text;
-
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 

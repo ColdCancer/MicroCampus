@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">MicroCampus</string>
+    <string name="app_name">微校园</string>
     <string name="title_home">课程表</string>
     <string name="title_gadget">小工具</string>
     <string name="title_message">信息</string>
@@ -48,6 +48,7 @@
         <item>第十九周</item>
         <item>第二十周</item>
     </string-array>
+
     <string name="week_tip">请选择课程周</string>
 
 </resources>

@@ -10,7 +10,6 @@ import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
 import com.example.microcampus.demo.bean.Lesson;
-import com.example.microcampus.spider.Spider;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -26,12 +25,12 @@ public class HomeViewModel extends ViewModel {
 
     public void updateLessons(FragmentActivity activity) {
         if (activity == null) return;
-        SharedPreferences sharedPreferences = activity.getSharedPreferences("userInform", Context.MODE_PRIVATE);
-        String account = sharedPreferences.getString("account", "");
-        String password = sharedPreferences.getString("password", "");
-        Spider spider = new Spider();
-        // TODO: 2021/5/20 Spider Thread for geting lesson information
-        spider.login(account, password);
+//        SharedPreferences sharedPreferences = activity.getSharedPreferences("userInform", Context.MODE_PRIVATE);
+//        String account = sharedPreferences.getString("account", "");
+//        String password = sharedPreferences.getString("password", "");
+//        Spider spider = new Spider();
+//        // TODO: 2021/5/20 Spider Thread for geting lesson information
+//        spider.login(account, password);
 
         List<Lesson> lessons = new ArrayList<>();
         lessons.add(new Lesson("移动应用开发1", "Aide", "6",
