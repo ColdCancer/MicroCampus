@@ -56,6 +56,7 @@ public class LoginActivity extends AppCompatActivity {
                     editor.apply();
 
                     intent.putExtra("login", true);
+                    intent.putExtra("account", strUsername);
                     setResult(RESULT_OK, intent);
                     finish();
                 } else {
