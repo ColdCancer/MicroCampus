@@ -15,6 +15,7 @@ import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout;
 
 import com.example.microcampus.R;
 import com.example.microcampus.demo.bean.Lesson;
@@ -40,6 +41,7 @@ public class HomeFragment extends Fragment {
     HomeViewModel homeViewModel;
     private View root;
     private Spinner schedule_option;
+    private SwipeRefreshLayout swipeRefreshLayout;
 
     private RelativeLayout[] schedule_days;
     private int[] schedule_day_ids = {R.id.schedule_day1, R.id.schedule_day2, R.id.schedule_day3,
@@ -124,6 +126,15 @@ public class HomeFragment extends Fragment {
             public void onNothingSelected(AdapterView<?> parent) { }
         });
 
+        swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
+        swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
+            @Override
+            public void onRefresh() {
+                Toast.makeText(getActivity(), "Refresh", Toast.LENGTH_SHORT).show();
+                swipeRefreshLayout.setRefreshing(false);
+            }
+        });
+
         showingDateLayout();
 
         return root;
@@ -170,6 +181,7 @@ public class HomeFragment extends Fragment {
         dataService = new DataServiceImpl();
         schedule_option = root.findViewById(R.id.schedule_option);
         sharedHander = new SharedHander(getActivity(), "student");
+        swipeRefreshLayout = root.findViewById(R.id.swipeRefresh);
 
         try {
             startDate = new SimpleDateFormat("yyyy-MM-dd").parse(STARTDATE);

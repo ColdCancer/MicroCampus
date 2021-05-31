@@ -135,221 +135,227 @@
 
     </LinearLayout>
 
-    <ScrollView
+    <androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+        android:id="@+id/swipeRefresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <LinearLayout
-            android:id="@+id/schedule_main"
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_height="match_parent">
 
             <LinearLayout
-                android:id="@+id/schedule_sections"
-                android:layout_width="wrap_content"
+                android:id="@+id/schedule_main"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/schedule_background"
-                android:orientation="vertical">
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/section1"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_morning"
-                    android:text="@string/str_section1"/>
+                <LinearLayout
+                    android:id="@+id/schedule_sections"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@color/schedule_background"
+                    android:orientation="vertical">
 
-                <TextView
-                    android:id="@+id/section2"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_morning"
-                    android:text="@string/str_section2"/>
+                    <TextView
+                        android:id="@+id/section1"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_morning"
+                        android:text="@string/str_section1"/>
 
-                <TextView
-                    android:id="@+id/section3"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_morning"
-                    android:text="@string/str_section3"/>
+                    <TextView
+                        android:id="@+id/section2"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_morning"
+                        android:text="@string/str_section2"/>
 
-                <TextView
-                    android:id="@+id/section4"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_morning"
-                    android:text="@string/str_section4"/>
+                    <TextView
+                        android:id="@+id/section3"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_morning"
+                        android:text="@string/str_section3"/>
 
-                <TextView
-                    android:id="@+id/section5"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_afternoon"
-                    android:text="@string/str_section5"/>
+                    <TextView
+                        android:id="@+id/section4"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_morning"
+                        android:text="@string/str_section4"/>
 
-                <TextView
-                    android:id="@+id/section6"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_afternoon"
-                    android:text="@string/str_section6"/>
+                    <TextView
+                        android:id="@+id/section5"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_afternoon"
+                        android:text="@string/str_section5"/>
 
-                <TextView
-                    android:id="@+id/section7"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_afternoon"
-                    android:text="@string/str_section7"/>
+                    <TextView
+                        android:id="@+id/section6"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_afternoon"
+                        android:text="@string/str_section6"/>
 
-                <TextView
-                    android:id="@+id/section8"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_afternoon"
-                    android:text="@string/str_section8"/>
+                    <TextView
+                        android:id="@+id/section7"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_afternoon"
+                        android:text="@string/str_section7"/>
 
-                <TextView
-                    android:id="@+id/section9"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_evening"
-                    android:text="@string/str_section9"/>
+                    <TextView
+                        android:id="@+id/section8"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_afternoon"
+                        android:text="@string/str_section8"/>
 
-                <TextView
-                    android:id="@+id/section10"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_evening"
-                    android:text="@string/str_section10"/>
+                    <TextView
+                        android:id="@+id/section9"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_evening"
+                        android:text="@string/str_section9"/>
 
-                <TextView
-                    android:id="@+id/section11"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_evening"
-                    android:text="@string/str_section11"/>
+                    <TextView
+                        android:id="@+id/section10"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_evening"
+                        android:text="@string/str_section10"/>
 
-                <TextView
-                    android:id="@+id/section12"
-                    android:layout_width="@dimen/schedule_section_width"
-                    android:layout_height="@dimen/schedule_section_height"
-                    android:layout_marginVertical="1dp"
-                    android:padding="1dp"
-                    android:gravity="center"
-                    android:textSize="@dimen/schedule_section_size"
-                    android:background="@color/schedule_section_evening"
-                    android:text="@string/str_section12"/>
+                    <TextView
+                        android:id="@+id/section11"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_evening"
+                        android:text="@string/str_section11"/>
+
+                    <TextView
+                        android:id="@+id/section12"
+                        android:layout_width="@dimen/schedule_section_width"
+                        android:layout_height="@dimen/schedule_section_height"
+                        android:layout_marginVertical="1dp"
+                        android:padding="1dp"
+                        android:gravity="center"
+                        android:textSize="@dimen/schedule_section_size"
+                        android:background="@color/schedule_section_evening"
+                        android:text="@string/str_section12"/>
+                </LinearLayout>
+
+                <RelativeLayout
+                    android:id="@+id/schedule_day1"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="1dp">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/schedule_day2"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="1dp">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/schedule_day3"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="1dp">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/schedule_day4"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="1dp">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/schedule_day5"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="1dp">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/schedule_day6"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="1dp">
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:id="@+id/schedule_day7"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="match_parent"
+                    android:orientation="vertical"
+                    android:layout_margin="1dp">
+                </RelativeLayout>
+
             </LinearLayout>
 
-            <RelativeLayout
-                android:id="@+id/schedule_day1"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="1dp">
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/schedule_day2"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="1dp">
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/schedule_day3"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="1dp">
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/schedule_day4"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="1dp">
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/schedule_day5"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="1dp">
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/schedule_day6"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="1dp">
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:id="@+id/schedule_day7"
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="match_parent"
-                android:orientation="vertical"
-                android:layout_margin="1dp">
-            </RelativeLayout>
-
-        </LinearLayout>
-
-    </ScrollView>
+        </ScrollView>
+    </androidx.swiperefreshlayout.widget.SwipeRefreshLayout>
 
 </LinearLayout>
