@@ -19,12 +19,14 @@ import com.example.microcampus.MainActivity;
 import com.example.microcampus.R;
 import com.example.microcampus.demo.service.DataService;
 import com.example.microcampus.demo.service.impl.DataServiceImpl;
+import com.example.microcampus.demo.util.SharedHander;
 
 public class LoginActivity extends AppCompatActivity {
     private EditText username, password;
     private Button login, cancel;
     private CheckBox remember, autoLogin;
-    private SharedPreferences sharedPreferences;
+//    private SharedPreferences sharedPreferences;
+    SharedHander sharedHander;
     private DataService dataService;
 
     @Override
@@ -34,8 +36,8 @@ public class LoginActivity extends AppCompatActivity {
 
         init();
 
-        if (sharedPreferences.getBoolean("remember", false)) {
-            username.setText(sharedPreferences.getString("account", ""));
+        if (sharedHander.getBoolean("remember")) {
+            username.setText(sharedHander.getString("account"));
             password.requestFocus();
         }
 
@@ -48,16 +50,12 @@ public class LoginActivity extends AppCompatActivity {
 
                 if (dataService.login(strUsername, strPassword)) {
                     // TODO: 2021/5/26 add file save faction
-                    SharedPreferences.Editor editor = sharedPreferences.edit();
-                    editor.putString("account", strUsername);
-                    editor.putString("password", strPassword);
-                    editor.putBoolean("remember", remember.isChecked());
-                    editor.putBoolean("autoLogin", autoLogin.isChecked());
-                    editor.apply();
+                    sharedHander.putString("account", strUsername);
+                    sharedHander.putString("password", strPassword);
+                    sharedHander.putBoolean("remember", remember.isChecked());
+                    sharedHander.putBoolean("autoLogin", autoLogin.isChecked());
 
-                    intent.putExtra("login", true);
-                    intent.putExtra("account", strUsername);
-                    setResult(RESULT_OK, intent);
+                    setResult(RESULT_OK);
                     finish();
                 } else {
                     Toast.makeText(LoginActivity.this, "账号、密码错误！", Toast.LENGTH_SHORT).show();
@@ -83,13 +81,14 @@ public class LoginActivity extends AppCompatActivity {
     }
 
     private void init() {
-        sharedPreferences = getSharedPreferences("student", Context.MODE_PRIVATE);
+//        sharedPreferences = getSharedPreferences("student", Context.MODE_PRIVATE);
+        sharedHander = new SharedHander(this, "student");
         dataService = new DataServiceImpl();
-        username = (EditText) findViewById(R.id.username);
-        password = (EditText) findViewById(R.id.password);
-        login = (Button) findViewById(R.id.login);
-        cancel = (Button) findViewById(R.id.cancel);
-        remember = (CheckBox) findViewById(R.id.remember);
-        autoLogin = (CheckBox) findViewById(R.id.autoLogin);
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        login = findViewById(R.id.login);
+        cancel = findViewById(R.id.cancel);
+        remember = findViewById(R.id.remember);
+        autoLogin = findViewById(R.id.autoLogin);
     }
 }

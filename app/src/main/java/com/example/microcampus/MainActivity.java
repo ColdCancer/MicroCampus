@@ -10,6 +10,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.microcampus.demo.util.SharedHander;
 import com.example.microcampus.ui.message.MessageViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -24,7 +25,6 @@ import java.util.Objects;
 import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
-    private MessageViewModel notificationsViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,13 +45,13 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        notificationsViewModel =
-                ViewModelProviders.of(this).get(MessageViewModel.class);
+        initMessageData();
+    }
 
-        SharedPreferences sharedPreferences = getSharedPreferences("student", Context.MODE_PRIVATE);
-        boolean autoLoginFlag = sharedPreferences.getBoolean("autoLogin", false);
-        notificationsViewModel.setLoginFlag(autoLoginFlag);
-
+    private void initMessageData() {
+        MessageViewModel messageViewModel = ViewModelProviders.of(this).get(MessageViewModel.class);
+        SharedHander sharedHander = new SharedHander(this, "student");
+        messageViewModel.setLoginFlag(sharedHander.getBoolean("autoLogin"));
     }
 
 }
