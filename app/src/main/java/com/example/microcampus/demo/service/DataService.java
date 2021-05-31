@@ -9,5 +9,5 @@ import java.util.Map;
 public interface DataService {
     boolean login(String username, String password);
     Map<String, String> getBaseInformation(String username);
-    List<Lesson> getShceduleByDate(Date date);
+    List<Lesson> getShceduleByWeek(int week);
 }

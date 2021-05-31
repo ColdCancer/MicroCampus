@@ -1,63 +1,66 @@
 package com.example.microcampus.ui.home;
 
-import android.content.Context;
-import android.content.SharedPreferences;
-import android.content.res.Resources;
 import android.os.Bundle;
 import android.util.Log;
-import android.util.TypedValue;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.AdapterView;
 import android.widget.RelativeLayout;
+import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
-import com.example.microcampus.MainActivity;
 import com.example.microcampus.R;
 import com.example.microcampus.demo.bean.Lesson;
+import com.example.microcampus.demo.service.DataService;
+import com.example.microcampus.demo.service.impl.DataServiceImpl;
 import com.example.microcampus.demo.util.DatabaseHelper;
+import com.example.microcampus.demo.util.SharedHander;
+import com.example.microcampus.ui.message.MessageViewModel;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.Objects;
 
 public class HomeFragment extends Fragment {
     private float ITEM_HEIGHT;
     private float NORM_DIP;
-    private final int DAY = 7;
+    private final int ITEM_DAY = 7;
+    private final String STARTDATE = "2021-03-01"; // 确保起始时间在周一
 
+    HomeViewModel homeViewModel;
     private View root;
+    private Spinner schedule_option;
 
     private RelativeLayout[] schedule_days;
     private int[] schedule_day_ids = {R.id.schedule_day1, R.id.schedule_day2, R.id.schedule_day3,
             R.id.schedule_day4, R.id.schedule_day5, R.id.schedule_day6, R.id.schedule_day7};
+    private String[] schedule_day_str = {"星期一", "星期二", "星期三", "星期四", "星期五", "星期六", "星期日"};
 
     private TextView[] schedule_tips;
     private int[] schedule_tip_ids = {R.id.schedule_tip1, R.id.schedule_tip2, R.id.schedule_tip3,
             R.id.schedule_tip4, R.id.schedule_tip5, R.id.schedule_tip6, R.id.schedule_tip7};
 
+    private DataService dataService;
+    private Date startDate;
+    private SharedHander sharedHander;
+
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
-        HomeViewModel homeViewModel =
-                ViewModelProviders.of(this).get(HomeViewModel.class);
+        homeViewModel = ViewModelProviders.
+                of(Objects.requireNonNull(getActivity())).get(HomeViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
 
-        init();
-
-        final DatabaseHelper databaseHelper = new DatabaseHelper(getActivity(), "microcampus", null, 1);
-
-        for (int i = 0; i < DAY; i++) {
-            String message = schedule_tips[i].getText() + "\n" + "5/" + (10 + i);
-            schedule_tips[i].setText(message);
-        }
+        initVar();
 
         homeViewModel.getmLessons().observe(getViewLifecycleOwner(), new Observer<List<Lesson>>() {
             @Override
@@ -73,7 +76,9 @@ public class HomeFragment extends Fragment {
                         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
-                                databaseHelper.getReadableDatabase();
+                                for (int i = 0; i < ITEM_DAY; i++) {
+                                    schedule_days[i].removeAllViews();
+                                }
                                 for (int i = 0; i < lessons.size(); i++) {
                                     Lesson lesson = lessons.get(i);
                                     int begin = getBeginPositionByTime(lesson.getBeginTime());
@@ -88,7 +93,7 @@ public class HomeFragment extends Fragment {
                                     RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                                             ViewGroup.LayoutParams.MATCH_PARENT, end - begin);
                                     layoutParams.topMargin = begin;
-                                    schedule_days[lesson.getxDay() - 1].addView(item, layoutParams);
+                                    schedule_days[lesson.getDay()].addView(item, layoutParams);
                                 }
                             }
                         });
@@ -97,26 +102,89 @@ public class HomeFragment extends Fragment {
             }
         });
 
-        homeViewModel.updateLessons(getActivity());
+        schedule_option.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                Calendar calendar = Calendar.getInstance();
+
+                calendar.setTime(startDate);
+                calendar.add(Calendar.DATE, position * ITEM_DAY);
+
+                for (int i = 0; i < ITEM_DAY; i++) {
+                    String message = schedule_day_str[i] + "\n" + (calendar.get(Calendar.MONTH) + 1)
+                            + "/" + calendar.get(Calendar.DATE);
+                    schedule_tips[i].setText(message);
+                    calendar.add(Calendar.DATE, 1);
+                }
+
+                loadingScheduleInformation(position + 1);
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) { }
+        });
+
+        showingDateLayout();
 
         return root;
     }
 
+    private void showingDateLayout() {
+        final long DAY = 24 * 60 * 60 * 1000;
+        Date now = new Date();
 
-    private void init() {
+        int weekth = (int)((now.getTime() - startDate.getTime()) / DAY) / ITEM_DAY;
+        schedule_option.setSelection(weekth);
+    }
+
+    private void loadingScheduleInformation(int week) {
+        MessageViewModel messageViewModel = ViewModelProviders.
+                of(Objects.requireNonNull(getActivity())).get(MessageViewModel.class);
+
+        if (!messageViewModel.checkLogin()) {
+            noLoginState("请先登录账号、密码！");
+            return;
+        }
+
+        String account = sharedHander.getString("account");
+        String password = sharedHander.getString("password");
+        if (!dataService.login(account, password)) {
+            noLoginState("账号、密码已失效，请重新登录！");
+            return;
+        }
+
+        homeViewModel.setLessons(dataService.getShceduleByWeek(week));
+    }
+
+    private void noLoginState(String message) {
+        for (int i = 0; i < ITEM_DAY; i++) {
+            schedule_days[i].removeAllViews();
+        }
+        Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
+    }
+
+    private void initVar() {
         ITEM_HEIGHT = getResources().getDimensionPixelSize(R.dimen.schedule_section_height);
         NORM_DIP = getResources().getDimensionPixelSize(R.dimen.norm_dp);
 
-        schedule_days = new RelativeLayout[DAY];
-        for (int i = 0; i < DAY; i++) {
-            schedule_days[i] = (RelativeLayout) root.findViewById(schedule_day_ids[i]);
+        dataService = new DataServiceImpl();
+        schedule_option = root.findViewById(R.id.schedule_option);
+        sharedHander = new SharedHander(getActivity(), "student");
+
+        try {
+            startDate = new SimpleDateFormat("yyyy-MM-dd").parse(STARTDATE);
+        } catch (ParseException e) {
+            Log.i("debug", "学期开始周期不合法！");
         }
 
-        schedule_tips = new TextView[DAY];
-        for (int i= 0; i < DAY; i++) {
-            schedule_tips[i] = (TextView) root.findViewById(schedule_tip_ids[i]);
+        schedule_days = new RelativeLayout[ITEM_DAY];
+        for (int i = 0; i < ITEM_DAY; i++) {
+            schedule_days[i] = root.findViewById(schedule_day_ids[i]);
         }
-
+        schedule_tips = new TextView[ITEM_DAY];
+        for (int i = 0; i < ITEM_DAY; i++) {
+            schedule_tips[i] = root.findViewById(schedule_tip_ids[i]);
+        }
     }
 
     private int getEndPositionByTime(int time) {

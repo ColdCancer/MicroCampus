@@ -10,7 +10,11 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.microcampus.demo.util.DatabaseHelper;
 import com.example.microcampus.demo.util.SharedHander;
+import com.example.microcampus.ui.gadget.GadgetFragment;
+import com.example.microcampus.ui.gadget.GadgetViewModel;
+import com.example.microcampus.ui.home.HomeViewModel;
 import com.example.microcampus.ui.message.MessageViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
@@ -45,12 +49,16 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        initMessageData();
+        final DatabaseHelper databaseHelper = new DatabaseHelper(this, "microcampus", null, 1);
+
+        initAutoLogin();
+
     }
 
-    private void initMessageData() {
+    private void initAutoLogin() {
         MessageViewModel messageViewModel = ViewModelProviders.of(this).get(MessageViewModel.class);
         SharedHander sharedHander = new SharedHander(this, "student");
+
         messageViewModel.setLoginFlag(sharedHander.getBoolean("autoLogin"));
     }
 

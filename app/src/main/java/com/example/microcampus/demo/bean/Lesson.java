@@ -5,28 +5,24 @@ import java.util.Date;
 public class Lesson {
     private String lessonName;
     private String teacherName;
-    private String lessonCATS;
+    private float lessonCATS;
     private String lessonAttibution;
-    private int month;
     private int day;
     private int week;
-    private int xDay;
     private int beginTime;
     private int endTime;
     private String place;
 
     public Lesson() { }
 
-    public Lesson(String lessonName, String teacherName, String lessonCATS, String lessonAttibution,
-                  int month, int day, int week, int xDay, int beginTime, int endTime, String place) {
+    public Lesson(String lessonName, String teacherName, float lessonCATS, String lessonAttibution,
+                  int day, int week, int beginTime, int endTime, String place) {
         this.lessonName = lessonName;
         this.teacherName = teacherName;
         this.lessonCATS = lessonCATS;
         this.lessonAttibution = lessonAttibution;
-        this.month = month;
         this.day = day;
         this.week = week;
-        this.xDay = xDay;
         this.beginTime = beginTime;
         this.endTime = endTime;
         this.place = place;
@@ -48,11 +44,11 @@ public class Lesson {
         this.teacherName = teacherName;
     }
 
-    public String getLessonCATS() {
+    public float getLessonCATS() {
         return lessonCATS;
     }
 
-    public void setLessonCATS(String lessonCATS) {
+    public void setLessonCATS(float lessonCATS) {
         this.lessonCATS = lessonCATS;
     }
 
@@ -62,14 +58,6 @@ public class Lesson {
 
     public void setLessonAttibution(String lessonAttibution) {
         this.lessonAttibution = lessonAttibution;
-    }
-
-    public int getMonth() {
-        return month;
-    }
-
-    public void setMonth(int month) {
-        this.month = month;
     }
 
     public int getDay() {
@@ -86,14 +74,6 @@ public class Lesson {
 
     public void setWeek(int week) {
         this.week = week;
-    }
-
-    public int getxDay() {
-        return xDay;
-    }
-
-    public void setxDay(int xDay) {
-        this.xDay = xDay;
     }
 
     public int getBeginTime() {

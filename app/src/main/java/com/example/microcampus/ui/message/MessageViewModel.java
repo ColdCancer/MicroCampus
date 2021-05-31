@@ -27,15 +27,11 @@ public class MessageViewModel extends ViewModel {
         this.mBaseInformation.setValue(baseInformation);
     }
 
-    public LiveData<Boolean> getLoginFlag() {
-        return mLoginFlag;
+    public boolean checkLogin() {
+        return mLoginFlag.getValue();
     }
 
     public void setLoginFlag(boolean flag) {
         mLoginFlag.setValue(flag);
-    }
-
-    public boolean checkLogin() {
-        return mLoginFlag.getValue();
     }
 }
