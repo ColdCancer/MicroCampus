@@ -12,5 +12,6 @@
     <color name="schedule_background">#ffffff</color>
     <color name="schedule_day">#77B4E4</color>
     <color name="schedule_item">#ddbbdd</color>
+    <color name="schedule_items_backgroud">#8CCEEC</color>
 
 </resources>

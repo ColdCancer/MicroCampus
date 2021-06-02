@@ -63,7 +63,7 @@ public class HomeFragment extends Fragment {
     private DataService dataService;
     private Date startDate;
     private SharedHander sharedHander;
-    private int select_week;
+    private int select_item, now_week, now_day;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
@@ -134,8 +134,9 @@ public class HomeFragment extends Fragment {
                     calendar.add(Calendar.DATE, 1);
                 }
 
-                select_week = position + 1;
+                select_item = position;
                 loadingScheduleInformation(position + 1);
+
             }
 
             @Override
@@ -147,8 +148,8 @@ public class HomeFragment extends Fragment {
             @Override
             public void onRefresh() {
                 if (messageViewModel.checkLogin()) {
-                    dataService.updataLessonByWeek(select_week);
-                    homeViewModel.setLessons(dataService.getShceduleByWeek(select_week));
+                    dataService.updataLessonByWeek(select_item + 1);
+                    homeViewModel.setLessons(dataService.getShceduleByWeek(select_item + 1));
                     Toast.makeText(getActivity(), "该周课程信息刷新成功!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "请先登录账号、密码！", Toast.LENGTH_SHORT).show();
@@ -166,8 +167,9 @@ public class HomeFragment extends Fragment {
         final long DAY = 24 * 60 * 60 * 1000;
         Date now = new Date();
 
-        int weekth = (int)((now.getTime() - startDate.getTime()) / DAY) / ITEM_DAY;
-        schedule_option.setSelection(weekth);
+        now_week = (int)((now.getTime() - startDate.getTime()) / DAY) / ITEM_DAY + 1;
+        now_day = now.getDay() + 1;
+        schedule_option.setSelection(now_week - 1);
     }
 
     private void loadingScheduleInformation(int week) {
@@ -184,6 +186,12 @@ public class HomeFragment extends Fragment {
         }
 
         homeViewModel.setLessons(dataService.getShceduleByWeek(week));
+
+        if (week == now_week) {
+            schedule_days[now_day - 1].setBackgroundResource(R.color.schedule_items_backgroud);
+        } else {
+            schedule_days[now_day - 1].setBackgroundResource(R.color.schedule_background);
+        }
     }
 
     private void noLoginState(String message) {
