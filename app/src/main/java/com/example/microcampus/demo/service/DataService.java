@@ -13,4 +13,5 @@ public interface DataService {
     void updataAllInformation();
     void deleteAllInformation();
     void closeDB();
+    void updataLessonByWeek(int week);
 }

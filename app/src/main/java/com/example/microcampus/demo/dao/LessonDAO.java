@@ -9,4 +9,5 @@ public interface LessonDAO {
     void close();
     void deletaLessons();
     List<Lesson> selectLessonsByWeek(int week);
+    void deletaLessonsByWeek(int week);
 }

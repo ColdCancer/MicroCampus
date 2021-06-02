@@ -36,8 +36,9 @@ public class LessonDAOImpl implements LessonDAO {
     @Override
     public List<Lesson> selectLessonsByWeek(int week) {
         List<Lesson> lessons = new ArrayList<>();
-        String[] where = {Integer.toString(week)};
-        Cursor cursor = db.query(TABLE_NAME, null, "week=?", where, null, null, null);
+        String where = "week=?";
+        String[] values = {Integer.toString(week)};
+        Cursor cursor = db.query(TABLE_NAME, null, where, values, null, null, null);
 
         while (cursor.moveToNext()) {
             Lesson lesson = new Lesson();
@@ -54,6 +55,13 @@ public class LessonDAOImpl implements LessonDAO {
         }
 
         return lessons;
+    }
+
+    @Override
+    public void deletaLessonsByWeek(int week) {
+        String where = "week=?";
+        String[] values = {Integer.toString(week)};
+        db.delete(TABLE_NAME, where, values);
     }
 
     @Override

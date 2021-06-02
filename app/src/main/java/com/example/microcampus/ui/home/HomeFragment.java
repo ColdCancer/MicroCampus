@@ -1,11 +1,14 @@
 package com.example.microcampus.ui.home;
 
+import android.app.AlertDialog;
+import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
+import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -25,8 +28,11 @@ import com.example.microcampus.demo.util.DatabaseHelper;
 import com.example.microcampus.demo.util.SharedHander;
 import com.example.microcampus.ui.message.MessageViewModel;
 
+import org.w3c.dom.Text;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -39,6 +45,8 @@ public class HomeFragment extends Fragment {
     private final String STARTDATE = "2021-03-01"; // 确保起始时间在周一
 
     HomeViewModel homeViewModel;
+    MessageViewModel messageViewModel;
+
     private View root;
     private Spinner schedule_option;
     private SwipeRefreshLayout swipeRefreshLayout;
@@ -55,6 +63,7 @@ public class HomeFragment extends Fragment {
     private DataService dataService;
     private Date startDate;
     private SharedHander sharedHander;
+    private int select_week;
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
@@ -87,14 +96,20 @@ public class HomeFragment extends Fragment {
                                     int end = getEndPositionByTime(lesson.getEndTime());
 
                                     View item = inflater.inflate(R.layout.schedule_item, null, false);
+                                    item.setOnClickListener(new OnClickItem());
+
                                     TextView name = item.findViewById(R.id.lesson_name);
                                     name.setText(lesson.getLessonName());
                                     TextView message = item.findViewById(R.id.lesson_message);
                                     message.setText(lesson.getPlace());
+                                    TextView index = item.findViewById(R.id.lesson_index);
+                                    String number = Integer.toString(i);
+                                    index.setText(number);
 
                                     RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                                             ViewGroup.LayoutParams.MATCH_PARENT, end - begin);
                                     layoutParams.topMargin = begin;
+
                                     schedule_days[lesson.getDay()].addView(item, layoutParams);
                                 }
                             }
@@ -119,6 +134,7 @@ public class HomeFragment extends Fragment {
                     calendar.add(Calendar.DATE, 1);
                 }
 
+                select_week = position + 1;
                 loadingScheduleInformation(position + 1);
             }
 
@@ -130,7 +146,13 @@ public class HomeFragment extends Fragment {
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                Toast.makeText(getActivity(), "Refresh", Toast.LENGTH_SHORT).show();
+                if (messageViewModel.checkLogin()) {
+                    dataService.updataLessonByWeek(select_week);
+                    homeViewModel.setLessons(dataService.getShceduleByWeek(select_week));
+                    Toast.makeText(getActivity(), "该周课程信息刷新成功!", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(getActivity(), "请先登录账号、密码！", Toast.LENGTH_SHORT).show();
+                }
                 swipeRefreshLayout.setRefreshing(false);
             }
         });
@@ -149,9 +171,6 @@ public class HomeFragment extends Fragment {
     }
 
     private void loadingScheduleInformation(int week) {
-        MessageViewModel messageViewModel = ViewModelProviders.
-                of(Objects.requireNonNull(getActivity())).get(MessageViewModel.class);
-
         if (!messageViewModel.checkLogin()) {
             noLoginState("请先登录账号、密码！");
             return;
@@ -171,6 +190,7 @@ public class HomeFragment extends Fragment {
         for (int i = 0; i < ITEM_DAY; i++) {
             schedule_days[i].removeAllViews();
         }
+        homeViewModel.setLessons(new ArrayList<Lesson>());
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
@@ -182,6 +202,8 @@ public class HomeFragment extends Fragment {
         schedule_option = root.findViewById(R.id.schedule_option);
         sharedHander = new SharedHander(getActivity(), "student");
         swipeRefreshLayout = root.findViewById(R.id.swipeRefresh);
+        messageViewModel = ViewModelProviders.
+                of(Objects.requireNonNull(getActivity())).get(MessageViewModel.class);
 
         try {
             startDate = new SimpleDateFormat("yyyy-MM-dd").parse(STARTDATE);
@@ -193,6 +215,7 @@ public class HomeFragment extends Fragment {
         for (int i = 0; i < ITEM_DAY; i++) {
             schedule_days[i] = root.findViewById(schedule_day_ids[i]);
         }
+
         schedule_tips = new TextView[ITEM_DAY];
         for (int i = 0; i < ITEM_DAY; i++) {
             schedule_tips[i] = root.findViewById(schedule_tip_ids[i]);
@@ -211,5 +234,22 @@ public class HomeFragment extends Fragment {
     public void onDestroy() {
         dataService.closeDB();
         super.onDestroy();
+    }
+
+    class OnClickItem implements View.OnClickListener {
+
+        @Override
+        public void onClick(View v) {
+            TextView textView = v.findViewById(R.id.lesson_index);
+            int index = Integer.parseInt(textView.getText().toString());
+
+            Lesson lesson = homeViewModel.getLessonByIndex(index);
+
+            AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+            builder.setMessage(lesson.toString());
+            builder.setPositiveButton("确定", null);
+            final AlertDialog dialog = builder.create();
+            dialog.show();
+        }
     }
 }

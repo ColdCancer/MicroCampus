@@ -1,5 +1,7 @@
 package com.example.microcampus.demo.bean;
 
+import androidx.annotation.NonNull;
+
 import java.util.Date;
 
 public class Lesson {
@@ -54,6 +56,19 @@ public class Lesson {
 
     public String getLessonAttibution() {
         return lessonAttibution;
+    }
+
+    @NonNull
+    @Override
+    public String toString() {
+        String[] days = {"一", "二", "三", "四", "五", "六", "日"};
+        return "课程名称：" + lessonName +
+               "\n教师名字：" + teacherName +
+               "\n课程学分：" + lessonCATS +
+               "\n课程属性：" + lessonAttibution +
+               "\n周次日期：第 " + week + " 周，星期 " + days[day] +
+               "\n课程节次：第 " + beginTime + " - " + endTime + " 小节" +
+               "\n课程场地：" + place;
     }
 
     public void setLessonAttibution(String lessonAttibution) {

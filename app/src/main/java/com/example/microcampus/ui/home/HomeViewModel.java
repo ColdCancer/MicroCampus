@@ -26,4 +26,8 @@ public class HomeViewModel extends ViewModel {
     public void setLessons(List<Lesson> lessons) {
         this.mLessons.setValue(lessons);
     }
+
+    public Lesson getLessonByIndex(int index) {
+        return Objects.requireNonNull(mLessons.getValue()).get(index);
+    }
 }

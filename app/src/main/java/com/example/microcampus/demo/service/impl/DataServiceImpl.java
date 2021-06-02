@@ -50,6 +50,12 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
+    public void updataLessonByWeek(int week) {
+        lessonDAO.deletaLessonsByWeek(week);
+        lessonDAO.insertLessons(randomGeneration(week));
+    }
+
+    @Override
     public void deleteAllInformation() {
         lessonDAO.deletaLessons();
     }
