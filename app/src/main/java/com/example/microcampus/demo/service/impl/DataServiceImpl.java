@@ -1,9 +1,15 @@
 package com.example.microcampus.demo.service.impl;
 
+import android.content.ContentValues;
+import android.content.Context;
+import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
 
 import com.example.microcampus.demo.bean.Lesson;
+import com.example.microcampus.demo.dao.LessonDAO;
+import com.example.microcampus.demo.dao.impl.LessonDAOImpl;
 import com.example.microcampus.demo.service.DataService;
+import com.example.microcampus.demo.util.DatabaseHelper;
 
 import java.util.ArrayList;
 import java.util.Date;
@@ -13,10 +19,16 @@ import java.util.Map;
 import java.util.Random;
 
 public class DataServiceImpl implements DataService {
+    private LessonDAO lessonDAO;
+
     private final String[] palces = {"教-525(濂溪)", "教-423(濂溪)", "实-510 Windows Phone实训室(濂溪)"};
     private final String[] teachers = {"吕嘉言", "埃迪", "住户平", "立业", "曹辉", "玉峰"};
     private final String[] attributes = {"选修课", "必修课"};
     private final String[] names = {"大数据可视化技术", "移动应用开发"};
+
+    public DataServiceImpl(Context context) {
+        lessonDAO = new LessonDAOImpl(context);
+    }
 
     @Override
     public boolean login(String username, String password) {
@@ -33,14 +45,31 @@ public class DataServiceImpl implements DataService {
     }
 
     @Override
-    public List<Lesson> getShceduleByWeek(int week) {
+    public void closeDB() {
+        lessonDAO.close();
+    }
+
+    @Override
+    public void deleteAllInformation() {
+        lessonDAO.deletaLessons();
+    }
+
+    @Override
+    public void updataAllInformation() {
+        for (int i = 1; i <= 20; i++) {
+            List<Lesson> lessons = randomGeneration(i);
+            lessonDAO.insertLessons(lessons);
+        }
+    }
+
+    private List<Lesson> randomGeneration(int week) {
         Random random = new Random();
         int count = 6 + random.nextInt(10) % 5;
 
         List<Lesson> lessons = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             Lesson lesson = new Lesson();
-            int beginTime = 1 + (random.nextInt() % 5) * 2;
+            int beginTime = 1 + (random.nextInt(10) % 5) * 2;
             lesson.setBeginTime(beginTime);
             lesson.setEndTime(beginTime + 1);
             lesson.setDay(random.nextInt(10) % 7);
@@ -53,5 +82,10 @@ public class DataServiceImpl implements DataService {
             lessons.add(lesson);
         }
         return lessons;
+    }
+
+    @Override
+    public List<Lesson> getShceduleByWeek(int week) {
+        return lessonDAO.selectLessonsByWeek(week);
     }
 }

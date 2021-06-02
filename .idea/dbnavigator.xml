@@ -2,7 +2,7 @@
 <project version="4">
   <component name="DBNavigator.Project.DataEditorManager">
     <record-view-column-sorting-type value="BY_INDEX" />
-    <value-preview-text-wrapping value="true" />
+    <value-preview-text-wrapping value="false" />
     <value-preview-pinned value="false" />
   </component>
   <component name="DBNavigator.Project.DataExportManager">
@@ -25,21 +25,21 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="95f43b70-4cce-444a-8149-69b3a5027a9c">
+      <connection connection-id="1f4aab04-c106-4dcb-b0ca-51d6b4ba7dc6">
         <schema name="main" object-types="table, view, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="95f43b70-4cce-444a-8149-69b3a5027a9c">
-      <console name="Connection" type="STANDARD" schema="main" session="Main" />
+    <connection id="1f4aab04-c106-4dcb-b0ca-51d6b4ba7dc6">
+      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from lesson;]]></console>
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="95f43b70-4cce-444a-8149-69b3a5027a9c" />
+    <connection id="1f4aab04-c106-4dcb-b0ca-51d6b4ba7dc6" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -67,7 +67,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="95f43b70-4cce-444a-8149-69b3a5027a9c" active="true">
+      <connection id="1f4aab04-c106-4dcb-b0ca-51d6b4ba7dc6" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
@@ -82,7 +82,7 @@
           <port value="1234" />
           <database value="database" />
           <files>
-            <file path="C:\Users\SvipVM\Desktop\microcampus" schema="main" />
+            <file path="C:\Users\SvipVM\Desktop\microcampus.db" schema="main" />
           </files>
           <type value="NONE" />
           <user value="" />

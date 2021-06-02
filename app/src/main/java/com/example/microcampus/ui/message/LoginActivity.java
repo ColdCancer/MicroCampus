@@ -76,6 +76,7 @@ public class LoginActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         setResult(RESULT_CANCELED);
+        dataService.closeDB();
         finish();
         super.onDestroy();
     }
@@ -83,7 +84,7 @@ public class LoginActivity extends AppCompatActivity {
     private void init() {
 //        sharedPreferences = getSharedPreferences("student", Context.MODE_PRIVATE);
         sharedHander = new SharedHander(this, "student");
-        dataService = new DataServiceImpl();
+        dataService = new DataServiceImpl(this);
         username = findViewById(R.id.username);
         password = findViewById(R.id.password);
         login = findViewById(R.id.login);

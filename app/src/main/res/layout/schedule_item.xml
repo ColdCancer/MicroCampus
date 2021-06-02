@@ -3,23 +3,29 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="@dimen/schedule_section_height"
-    android:orientation="vertical"
     android:background="@color/schedule_item">
 
-    <TextView
-        android:id="@+id/lesson_name"
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:paddingTop="@dimen/schedule_item_padding"
-        android:gravity="center"
-        android:textSize="@dimen/schedule_item_name_size"/>
+        android:orientation="vertical"
+        android:layout_gravity="center">
 
-    <TextView
-        android:id="@+id/lesson_message"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="center"
-        android:textSize="@dimen/schedule_item_message_size"/>
+        <TextView
+            android:id="@+id/lesson_name"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/schedule_item_name_size"/>
+
+        <TextView
+            android:id="@+id/lesson_message"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/schedule_item_message_size"/>
+
+    </LinearLayout>
 
 
 </LinearLayout>

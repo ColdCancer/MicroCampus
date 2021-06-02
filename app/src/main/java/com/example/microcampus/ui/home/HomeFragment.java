@@ -178,7 +178,7 @@ public class HomeFragment extends Fragment {
         ITEM_HEIGHT = getResources().getDimensionPixelSize(R.dimen.schedule_section_height);
         NORM_DIP = getResources().getDimensionPixelSize(R.dimen.norm_dp);
 
-        dataService = new DataServiceImpl();
+        dataService = new DataServiceImpl(getActivity());
         schedule_option = root.findViewById(R.id.schedule_option);
         sharedHander = new SharedHander(getActivity(), "student");
         swipeRefreshLayout = root.findViewById(R.id.swipeRefresh);
@@ -207,4 +207,9 @@ public class HomeFragment extends Fragment {
         return (int) (ITEM_HEIGHT + 2 * NORM_DIP) * (time - 1);
     }
 
+    @Override
+    public void onDestroy() {
+        dataService.closeDB();
+        super.onDestroy();
+    }
 }

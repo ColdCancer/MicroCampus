@@ -3,6 +3,7 @@ package com.example.microcampus;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
@@ -10,6 +11,8 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.microcampus.demo.service.DataService;
+import com.example.microcampus.demo.service.impl.DataServiceImpl;
 import com.example.microcampus.demo.util.DatabaseHelper;
 import com.example.microcampus.demo.util.SharedHander;
 import com.example.microcampus.ui.gadget.GadgetFragment;
@@ -29,6 +32,9 @@ import java.util.Objects;
 import java.util.zip.Inflater;
 
 public class MainActivity extends AppCompatActivity {
+    private DataService dataService;
+    SharedHander sharedHander;
+    MessageViewModel messageViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,15 +55,24 @@ public class MainActivity extends AppCompatActivity {
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(navView, navController);
 
-        final DatabaseHelper databaseHelper = new DatabaseHelper(this, "microcampus", null, 1);
 
         initAutoLogin();
 
     }
 
+    @Override
+    protected void onDestroy() {
+        if (!sharedHander.getBoolean("autoLogin")) {
+            dataService = new DataServiceImpl(this);
+            dataService.deleteAllInformation();
+            dataService.closeDB();
+        }
+        super.onDestroy();
+    }
+
     private void initAutoLogin() {
-        MessageViewModel messageViewModel = ViewModelProviders.of(this).get(MessageViewModel.class);
-        SharedHander sharedHander = new SharedHander(this, "student");
+        messageViewModel = ViewModelProviders.of(this).get(MessageViewModel.class);
+        sharedHander = new SharedHander(this, "student");
 
         messageViewModel.setLoginFlag(sharedHander.getBoolean("autoLogin"));
     }

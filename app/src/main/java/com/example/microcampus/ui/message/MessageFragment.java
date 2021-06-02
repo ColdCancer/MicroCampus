@@ -19,6 +19,7 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.microcampus.R;
 import com.example.microcampus.demo.service.DataService;
 import com.example.microcampus.demo.service.impl.DataServiceImpl;
+import com.example.microcampus.demo.util.DatabaseHelper;
 import com.example.microcampus.demo.util.SharedHander;
 
 import java.util.Map;
@@ -44,6 +45,8 @@ public class MessageFragment extends Fragment {
                 messageViewModel.setLoginFlag(true);
                 messageViewModel.setBaseInformation(dataService.getBaseInformation(
                         sharedHander.getString("account")));
+
+                dataService.updataAllInformation();
                 showingStudentInformation();
             }
         }
@@ -75,6 +78,7 @@ public class MessageFragment extends Fragment {
                 login.setVisibility(View.VISIBLE);
                 messageViewModel.setLoginFlag(false);
                 sharedHander.putBoolean("autoLogin", false);
+                dataService.deleteAllInformation();
                 Toast.makeText(getContext(), "账号登出成功！", Toast.LENGTH_SHORT).show();
             }
         });
@@ -110,7 +114,7 @@ public class MessageFragment extends Fragment {
 
 
     private void initVar() {
-        dataService = new DataServiceImpl();
+        dataService = new DataServiceImpl(getActivity());
         sharedHander = new SharedHander(getActivity(), "student");
 
         login = root.findViewById(R.id.login);

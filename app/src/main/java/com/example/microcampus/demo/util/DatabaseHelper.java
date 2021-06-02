@@ -9,22 +9,23 @@ import android.widget.Toast;
 import androidx.annotation.Nullable;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
+    private static final String DATABASE_NAME = "microcampus.db";
+    private static final int DATABASE_VERSION = 1;
+
     private Context context;
     private static final String CREATE_LESSON = "create table lesson(" + "lessonName text," +
-            "teacherName text," + "lessonCATS text," + "lessonAttibution text," +
-            "month integer," + "day integer," + "week integer," + "xDay integer," +
-            "beginTime integer," + "endTime integer," + "place text)";
+            "teacherName text," + "lessonCATS real," + "lessonAttibution text," + "place text," +
+            "day integer," + "week integer," + "beginTime integer," + "endTime integer)";
 
-    public DatabaseHelper(@Nullable Context context, @Nullable String name,
-                          @Nullable SQLiteDatabase.CursorFactory factory, int version) {
-        super(context, name, factory, version);
+    public DatabaseHelper(Context context) {
+        super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_LESSON);
-        Toast.makeText(context, "Create finish", Toast.LENGTH_SHORT).show();
+        Toast.makeText(context, "欢迎使用，所有功能已准备好！", Toast.LENGTH_SHORT).show();
     }
 
     @Override

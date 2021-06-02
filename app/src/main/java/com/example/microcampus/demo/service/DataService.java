@@ -10,4 +10,7 @@ public interface DataService {
     boolean login(String username, String password);
     Map<String, String> getBaseInformation(String username);
     List<Lesson> getShceduleByWeek(int week);
+    void updataAllInformation();
+    void deleteAllInformation();
+    void closeDB();
 }
