@@ -16,6 +16,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     private static final String CREATE_LESSON = "create table lesson(" + "lessonName text," +
             "teacherName text," + "lessonCATS real," + "lessonAttibution text," + "place text," +
             "day integer," + "week integer," + "beginTime integer," + "endTime integer)";
+    private static final String CREATE_SOCRE = "create table score(" + "startYear integer," +
+            "endYear integer," + "term integer," + "lessonName text," + "lessonScore real)";
 
     public DatabaseHelper(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
@@ -25,6 +27,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_LESSON);
+        db.execSQL(CREATE_SOCRE);
         Toast.makeText(context, "欢迎使用，所有功能已准备好！", Toast.LENGTH_SHORT).show();
     }
 

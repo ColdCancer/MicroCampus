@@ -11,7 +11,6 @@
     <ImageView
         android:layout_width="match_parent"
         android:layout_height="@dimen/gadget_image_height"
-        android:layout_marginBottom="@dimen/gadget_image_maring"
         android:scaleType="fitXY"
         android:src="@mipmap/gadget_image"/>
 
@@ -20,37 +19,23 @@
         android:layout_height="wrap_content"
         android:orientation="vertical">
 
-        <LinearLayout
+        <Button
+            android:id="@+id/gotoScore"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal">
+            android:layout_marginHorizontal="@dimen/gadget_button_margin"
+            android:layout_marginTop="@dimen/gadget_button_margin"
+            android:text="成绩查询"
+            android:textSize="@dimen/gadget_button_size"/>
 
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/score"/>
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/score"/>
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/score"/>
-
-            <ImageButton
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:src="@mipmap/score"/>
-
-
-        </LinearLayout>
+        <Button
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/gadget_button_margin"
+            android:layout_marginTop="@dimen/gadget_button_margin"
+            android:text="新功能待添加"
+            android:enabled="false"
+            android:textSize="@dimen/gadget_button_size"/>
 
     </LinearLayout>
 

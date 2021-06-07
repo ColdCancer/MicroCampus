@@ -37,5 +37,7 @@
     <dimen name="gadget_image_maring">20dp</dimen>
     <dimen name="gadget_image_height">200dp</dimen>
     <dimen name="gadget_button_scale">50dp</dimen>
+    <dimen name="gadget_button_margin">30dp</dimen>
+    <dimen name="gadget_button_size">20sp</dimen>
 
 </resources>
