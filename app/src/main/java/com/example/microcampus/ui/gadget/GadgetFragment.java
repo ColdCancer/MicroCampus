@@ -12,24 +12,27 @@ import androidx.fragment.app.Fragment;
 import androidx.lifecycle.Observer;
 import androidx.lifecycle.ViewModelProviders;
 
+import com.example.microcampus.MainViewModel;
 import com.example.microcampus.R;
 
-public class GadgetFragment extends Fragment {
+import java.util.Objects;
 
-//    private GadgetViewModel dashboardViewModel;
+public class GadgetFragment extends Fragment {
+    private MainViewModel mainViewModel;
+    private View root;
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-//        dashboardViewModel =
-//                ViewModelProviders.of(this).get(GadgetViewModel.class);
-        View root = inflater.inflate(R.layout.fragment_gadget, container, false);
-        final TextView textView = root.findViewById(R.id.text_dashboard);
-//        dashboardViewModel.getText().observe(getViewLifecycleOwner(), new Observer<String>() {
-//            @Override
-//            public void onChanged(@Nullable String s) {
-//                textView.setText(s);
-//            }
-//        });
+        mainViewModel =
+                ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(MainViewModel.class);
+        root = inflater.inflate(R.layout.fragment_gadget, container, false);
+
+        initVar();
+
         return root;
+    }
+
+    private void initVar() {
+
     }
 }

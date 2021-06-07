@@ -26,7 +26,6 @@ import java.util.Map;
 import java.util.Objects;
 
 public class MessageFragment extends Fragment {
-//    private MessageViewModel messageViewModel;
     private MainViewModel mainViewModel;
     private DataService dataService;
     private SharedHander sharedHander;

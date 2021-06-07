@@ -34,4 +34,8 @@
     <dimen name="login_item_height">42dp</dimen>
     <dimen name="login_item_size">18sp</dimen>
 
+    <dimen name="gadget_image_maring">20dp</dimen>
+    <dimen name="gadget_image_height">200dp</dimen>
+    <dimen name="gadget_button_scale">50dp</dimen>
+
 </resources>

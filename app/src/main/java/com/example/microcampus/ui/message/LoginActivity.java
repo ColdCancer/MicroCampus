@@ -1,8 +1,6 @@
 package com.example.microcampus.ui.message;
 
-import android.content.Context;
 import android.content.Intent;
-import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -12,8 +10,6 @@ import android.widget.Toast;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.lifecycle.LiveData;
-import androidx.lifecycle.MutableLiveData;
 
 import com.example.microcampus.MainActivity;
 import com.example.microcampus.R;
@@ -34,7 +30,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        init();
+        initVar();
 
         if (sharedHander.getBoolean("remember")) {
             username.setText(sharedHander.getString("account"));
@@ -81,7 +77,7 @@ public class LoginActivity extends AppCompatActivity {
         super.onDestroy();
     }
 
-    private void init() {
+    private void initVar() {
 //        sharedPreferences = getSharedPreferences("student", Context.MODE_PRIVATE);
         sharedHander = new SharedHander(this, "student");
         dataService = new DataServiceImpl(this);
