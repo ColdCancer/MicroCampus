@@ -1,14 +1,12 @@
 package com.example.microcampus.ui.home;
 
 import android.app.AlertDialog;
-import android.app.Dialog;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
-import android.widget.EditText;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.TextView;
@@ -24,11 +22,8 @@ import com.example.microcampus.R;
 import com.example.microcampus.demo.bean.Lesson;
 import com.example.microcampus.demo.service.DataService;
 import com.example.microcampus.demo.service.impl.DataServiceImpl;
-import com.example.microcampus.demo.util.DatabaseHelper;
 import com.example.microcampus.demo.util.SharedHander;
-import com.example.microcampus.ui.message.MessageViewModel;
-
-import org.w3c.dom.Text;
+import com.example.microcampus.MainViewModel;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -44,8 +39,7 @@ public class HomeFragment extends Fragment {
     private final int ITEM_DAY = 7;
     private final String STARTDATE = "2021-03-01"; // 确保起始时间在周一
 
-    HomeViewModel homeViewModel;
-    MessageViewModel messageViewModel;
+    MainViewModel mainViewModel;
 
     private View root;
     private Spinner schedule_option;
@@ -67,49 +61,54 @@ public class HomeFragment extends Fragment {
 
     public View onCreateView(@NonNull final LayoutInflater inflater,
                              final ViewGroup container, Bundle savedInstanceState) {
-        homeViewModel = ViewModelProviders.
-                of(Objects.requireNonNull(getActivity())).get(HomeViewModel.class);
+        mainViewModel = ViewModelProviders.
+                of(Objects.requireNonNull(getActivity())).get(MainViewModel.class);
         root = inflater.inflate(R.layout.fragment_home, container, false);
 
         initVar();
 
-        homeViewModel.getmLessons().observe(getViewLifecycleOwner(), new Observer<List<Lesson>>() {
+        // 观察课表信息变化，有变化则更新课表布局
+        mainViewModel.getmLessons().observe(getViewLifecycleOwner(), new Observer<List<Lesson>>() {
             @Override
             public void onChanged(final List<Lesson> lessons) {
                 new Thread(new Runnable() {
                     @Override
                     public void run() {
-                        try {
-                            Thread.sleep(100);
-                        } catch (InterruptedException e) {
-                            e.printStackTrace();
-                        }
+                        // running something ……
                         Objects.requireNonNull(getActivity()).runOnUiThread(new Runnable() {
                             @Override
                             public void run() {
+                                // running end, ans then modify layout
+
+                                // 清空上次的每天课程安排布局
                                 for (int i = 0; i < ITEM_DAY; i++) {
                                     schedule_days[i].removeAllViews();
                                 }
+
+                                // 处理每个课程布局
                                 for (int i = 0; i < lessons.size(); i++) {
+                                    // 获取课程，并计算其课表中的位置跨度
                                     Lesson lesson = lessons.get(i);
                                     int begin = getBeginPositionByTime(lesson.getBeginTime());
                                     int end = getEndPositionByTime(lesson.getEndTime());
 
+                                    // 新建课程布局对象，并设置点击监听事件
                                     View item = inflater.inflate(R.layout.schedule_item, null, false);
                                     item.setOnClickListener(new OnClickItem());
 
+                                    // 初始化课程布局信息
                                     TextView name = item.findViewById(R.id.lesson_name);
-                                    name.setText(lesson.getLessonName());
+                                    name.setText(lesson.getLessonName());                           // 课程名称
                                     TextView message = item.findViewById(R.id.lesson_message);
-                                    message.setText(lesson.getPlace());
+                                    message.setText(lesson.getPlace());                             // 课程地点
                                     TextView index = item.findViewById(R.id.lesson_index);
                                     String number = Integer.toString(i);
-                                    index.setText(number);
+                                    index.setText(number);                                          // 课程数组下标（在布局中不显示）
 
+                                    // 把课程加入到对应星期的布局中，并定位好位置
                                     RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams(
                                             ViewGroup.LayoutParams.MATCH_PARENT, end - begin);
                                     layoutParams.topMargin = begin;
-
                                     schedule_days[lesson.getDay()].addView(item, layoutParams);
                                 }
                             }
@@ -119,14 +118,16 @@ public class HomeFragment extends Fragment {
             }
         });
 
+        // Spinner 控件的选择监听
         schedule_option.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                // 对 Calendar 对象计算出学期开始到现在的时间差
                 Calendar calendar = Calendar.getInstance();
-
                 calendar.setTime(startDate);
                 calendar.add(Calendar.DATE, position * ITEM_DAY);
 
+                // 更新星期标题信息
                 for (int i = 0; i < ITEM_DAY; i++) {
                     String message = schedule_day_str[i] + "\n" + (calendar.get(Calendar.MONTH) + 1)
                             + "/" + calendar.get(Calendar.DATE);
@@ -134,22 +135,23 @@ public class HomeFragment extends Fragment {
                     calendar.add(Calendar.DATE, 1);
                 }
 
+                // 保存选择 Spinner 的下标信息，并加载课程信息
                 select_item = position;
-                loadingScheduleInformation(position + 1);
-
+                loadingScheduleInformation(position);
             }
 
             @Override
             public void onNothingSelected(AdapterView<?> parent) { }
         });
 
+        // 设置下拉刷新逻辑事件
         swipeRefreshLayout.setColorSchemeResources(R.color.colorPrimary);
         swipeRefreshLayout.setOnRefreshListener(new SwipeRefreshLayout.OnRefreshListener() {
             @Override
             public void onRefresh() {
-                if (messageViewModel.checkLogin()) {
+                if (mainViewModel.checkLogin()) {
                     dataService.updataLessonByWeek(select_item + 1);
-                    homeViewModel.setLessons(dataService.getShceduleByWeek(select_item + 1));
+                    mainViewModel.setLessons(dataService.getShceduleByWeek(select_item + 1));
                     Toast.makeText(getActivity(), "该周课程信息刷新成功!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "请先登录账号、密码！", Toast.LENGTH_SHORT).show();
@@ -167,17 +169,21 @@ public class HomeFragment extends Fragment {
         final long DAY = 24 * 60 * 60 * 1000;
         Date now = new Date();
 
-        now_week = (int)((now.getTime() - startDate.getTime()) / DAY) / ITEM_DAY + 1;
-        now_day = now.getDay() + 1;
-        schedule_option.setSelection(now_week - 1);
+        // now_week 从开始周次（第 0 周开始）到现在为第几周
+        now_week = (int)((now.getTime() - startDate.getTime()) / DAY) / ITEM_DAY;
+        // now_day 现在为星期几（0 代表星期一，以此类推）
+        now_day = now.getDay() - 1;
+        Log.i("debug", " " + now_day);
+        // 选择 now_week 周为默认显示的周
+        schedule_option.setSelection(now_week);
     }
 
     private void loadingScheduleInformation(int week) {
-        if (!messageViewModel.checkLogin()) {
+        // 判断是否合法，先判断是否登录过，在判断账号、密码是否还有效
+        if (!mainViewModel.checkLogin()) {
             noLoginState("请先登录账号、密码！");
             return;
         }
-
         String account = sharedHander.getString("account");
         String password = sharedHander.getString("password");
         if (!dataService.login(account, password)) {
@@ -185,12 +191,13 @@ public class HomeFragment extends Fragment {
             return;
         }
 
-        homeViewModel.setLessons(dataService.getShceduleByWeek(week));
-
+        // 更新课程信息
+        mainViewModel.setLessons(dataService.getShceduleByWeek(week));
+        // 当选择周是当前周时，设置高亮条，否则不设
         if (week == now_week) {
-            schedule_days[now_day - 1].setBackgroundResource(R.color.schedule_items_backgroud);
+            schedule_days[now_day].setBackgroundResource(R.color.schedule_items_backgroud);
         } else {
-            schedule_days[now_day - 1].setBackgroundResource(R.color.schedule_background);
+            schedule_days[now_day].setBackgroundResource(R.color.schedule_background);
         }
     }
 
@@ -198,7 +205,7 @@ public class HomeFragment extends Fragment {
         for (int i = 0; i < ITEM_DAY; i++) {
             schedule_days[i].removeAllViews();
         }
-        homeViewModel.setLessons(new ArrayList<Lesson>());
+        mainViewModel.setLessons(new ArrayList<Lesson>());
         Toast.makeText(getActivity(), message, Toast.LENGTH_SHORT).show();
     }
 
@@ -210,8 +217,6 @@ public class HomeFragment extends Fragment {
         schedule_option = root.findViewById(R.id.schedule_option);
         sharedHander = new SharedHander(getActivity(), "student");
         swipeRefreshLayout = root.findViewById(R.id.swipeRefresh);
-        messageViewModel = ViewModelProviders.
-                of(Objects.requireNonNull(getActivity())).get(MessageViewModel.class);
 
         try {
             startDate = new SimpleDateFormat("yyyy-MM-dd").parse(STARTDATE);
@@ -251,7 +256,7 @@ public class HomeFragment extends Fragment {
             TextView textView = v.findViewById(R.id.lesson_index);
             int index = Integer.parseInt(textView.getText().toString());
 
-            Lesson lesson = homeViewModel.getLessonByIndex(index);
+            Lesson lesson = mainViewModel.getLessonByIndex(index);
 
             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
             builder.setMessage(lesson.toString());

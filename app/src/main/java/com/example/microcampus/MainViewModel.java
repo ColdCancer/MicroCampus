@@ -1,22 +1,23 @@
-package com.example.microcampus.ui.message;
+package com.example.microcampus;
 
-import android.content.Context;
-
-import androidx.lifecycle.LiveData;
 import androidx.lifecycle.MutableLiveData;
 import androidx.lifecycle.ViewModel;
 
-import com.example.microcampus.demo.util.SharedHander;
+import com.example.microcampus.demo.bean.Lesson;
 
+import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
-public class MessageViewModel extends ViewModel {
+public class MainViewModel extends ViewModel {
     private MutableLiveData<Boolean> mLoginFlag;
     private MutableLiveData<Map<String, String>> mBaseInformation;
+    private MutableLiveData<List<Lesson>> mLessons;
 
-    public MessageViewModel() {
+    public MainViewModel() {
         mLoginFlag = new MutableLiveData<>(false);
         mBaseInformation = new MutableLiveData<>();
+        mLessons = new MutableLiveData<>();
     }
 
     public Map<String, String> getBaseInformation() {
@@ -33,5 +34,17 @@ public class MessageViewModel extends ViewModel {
 
     public void setLoginFlag(boolean flag) {
         mLoginFlag.setValue(flag);
+    }
+
+    public MutableLiveData<List<Lesson>> getmLessons() {
+        return mLessons;
+    }
+
+    public void setLessons(List<Lesson> lessons) {
+        this.mLessons.setValue(lessons);
+    }
+
+    public Lesson getLessonByIndex(int index) {
+        return Objects.requireNonNull(mLessons.getValue()).get(index);
     }
 }

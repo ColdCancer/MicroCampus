@@ -75,10 +75,10 @@ public class DataServiceImpl implements DataService {
         List<Lesson> lessons = new ArrayList<>();
         for (int i = 0; i < count; i++) {
             Lesson lesson = new Lesson();
-            int beginTime = 1 + (random.nextInt(10) % 5) * 2;
-            lesson.setBeginTime(beginTime);
-            lesson.setEndTime(beginTime + 1);
-            lesson.setDay(random.nextInt(10) % 7);
+            int beginTime = (random.nextInt(10) % 5) * 2 + 1;
+            lesson.setBeginTime(beginTime); // [1, 3, 5, ...
+            lesson.setEndTime(beginTime + 1); // [2, 4, 6, ...
+            lesson.setDay(random.nextInt(10) % 7); // [0, 1, 2, 3...
             lesson.setLessonAttibution(attributes[random.nextInt(10) % attributes.length]);
             lesson.setWeek(week);
             lesson.setPlace(palces[random.nextInt(10) % palces.length]);

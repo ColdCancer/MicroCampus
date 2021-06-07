@@ -19,14 +19,15 @@ import androidx.lifecycle.ViewModelProviders;
 import com.example.microcampus.R;
 import com.example.microcampus.demo.service.DataService;
 import com.example.microcampus.demo.service.impl.DataServiceImpl;
-import com.example.microcampus.demo.util.DatabaseHelper;
 import com.example.microcampus.demo.util.SharedHander;
+import com.example.microcampus.MainViewModel;
 
 import java.util.Map;
 import java.util.Objects;
 
 public class MessageFragment extends Fragment {
-    private MessageViewModel messageViewModel;
+//    private MessageViewModel messageViewModel;
+    private MainViewModel mainViewModel;
     private DataService dataService;
     private SharedHander sharedHander;
 
@@ -42,8 +43,8 @@ public class MessageFragment extends Fragment {
                 Toast.makeText(getActivity(), "账号登录成功！", Toast.LENGTH_SHORT).show();
 
                 // 登录成功，获取用户基本信息并显示
-                messageViewModel.setLoginFlag(true);
-                messageViewModel.setBaseInformation(dataService.getBaseInformation(
+                mainViewModel.setLoginFlag(true);
+                mainViewModel.setBaseInformation(dataService.getBaseInformation(
                         sharedHander.getString("account")));
 
                 dataService.updataAllInformation();
@@ -54,8 +55,8 @@ public class MessageFragment extends Fragment {
 
     public View onCreateView(@NonNull LayoutInflater inflater,
                              ViewGroup container, Bundle savedInstanceState) {
-        messageViewModel =
-                ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(MessageViewModel.class);
+        mainViewModel =
+                ViewModelProviders.of(Objects.requireNonNull(getActivity())).get(MainViewModel.class);
         root = inflater.inflate(R.layout.fragment_message, container, false);
 
         initVar();
@@ -76,7 +77,7 @@ public class MessageFragment extends Fragment {
             public void onClick(View v) {
                 message_content.setVisibility(View.INVISIBLE);
                 login.setVisibility(View.VISIBLE);
-                messageViewModel.setLoginFlag(false);
+                mainViewModel.setLoginFlag(false);
                 sharedHander.putBoolean("autoLogin", false);
                 dataService.deleteAllInformation();
                 Toast.makeText(getContext(), "账号登出成功！", Toast.LENGTH_SHORT).show();
@@ -88,7 +89,7 @@ public class MessageFragment extends Fragment {
 
     private void loadingStudentInformation() {
         // 判断用户是否选择自动登录
-        if (!messageViewModel.checkLogin()) return;
+        if (!mainViewModel.checkLogin()) return;
 
         // 判断用户账号密码是否可再登录
         String account = sharedHander.getString("account");
@@ -96,7 +97,7 @@ public class MessageFragment extends Fragment {
         if (!dataService.login(account, password)) return;
 
         // 获取用户的基本信息并保存在 ViewModel 中
-        messageViewModel.setBaseInformation(dataService.getBaseInformation(
+        mainViewModel.setBaseInformation(dataService.getBaseInformation(
                 sharedHander.getString("account")));
 
         showingStudentInformation();
@@ -106,7 +107,7 @@ public class MessageFragment extends Fragment {
         login.setVisibility(View.INVISIBLE);
         message_content.setVisibility(View.VISIBLE);
 
-        Map<String, String> information = messageViewModel.getBaseInformation();
+        Map<String, String> information = mainViewModel.getBaseInformation();
         message_name.setText("姓名：" + information.get("name"));
         message_account.setText("学号：" + information.get("account"));
         message_college.setText("学院：" + information.get("college"));

@@ -1,24 +1,10 @@
 package com.example.microcampus;
 
-import android.content.Context;
-import android.content.SharedPreferences;
 import android.os.Bundle;
-import android.util.Log;
-import android.view.LayoutInflater;
-import android.view.View;
-import android.widget.EditText;
-import android.widget.LinearLayout;
-import android.widget.TextView;
-import android.widget.Toast;
 
 import com.example.microcampus.demo.service.DataService;
 import com.example.microcampus.demo.service.impl.DataServiceImpl;
-import com.example.microcampus.demo.util.DatabaseHelper;
 import com.example.microcampus.demo.util.SharedHander;
-import com.example.microcampus.ui.gadget.GadgetFragment;
-import com.example.microcampus.ui.gadget.GadgetViewModel;
-import com.example.microcampus.ui.home.HomeViewModel;
-import com.example.microcampus.ui.message.MessageViewModel;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -28,13 +14,10 @@ import androidx.navigation.Navigation;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
-import java.util.Objects;
-import java.util.zip.Inflater;
-
 public class MainActivity extends AppCompatActivity {
     private DataService dataService;
-    SharedHander sharedHander;
-    MessageViewModel messageViewModel;
+    private SharedHander sharedHander;
+    private MainViewModel mainViewModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,10 +54,10 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void initAutoLogin() {
-        messageViewModel = ViewModelProviders.of(this).get(MessageViewModel.class);
+        mainViewModel = ViewModelProviders.of(this).get(MainViewModel.class);
         sharedHander = new SharedHander(this, "student");
 
-        messageViewModel.setLoginFlag(sharedHander.getBoolean("autoLogin"));
+        mainViewModel.setLoginFlag(sharedHander.getBoolean("autoLogin"));
     }
 
 }
