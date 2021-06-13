@@ -40,4 +40,12 @@
     <dimen name="gadget_button_margin">30dp</dimen>
     <dimen name="gadget_button_size">20sp</dimen>
 
+    <dimen name="score_padding">20dp</dimen>
+    <dimen name="score_item_padding">30dp</dimen>
+    <dimen name="score_title_size">20sp</dimen>
+    <dimen name="score_item_height">30dp</dimen>
+    <dimen name="score_item_size">16sp</dimen>
+    <dimen name="score_title_bottom">20dp</dimen>
+    <dimen name="score_item_bottom">10dp</dimen>
+
 </resources>

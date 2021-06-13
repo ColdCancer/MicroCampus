@@ -24,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        // hind activity top fence
+//         hind activity top fence
 //        Objects.requireNonNull(this.getSupportActionBar()).hide();
 
         BottomNavigationView navView = findViewById(R.id.nav_view);

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:orientation="horizontal"
+    android:paddingHorizontal="@dimen/score_item_padding"
+    android:layout_height="@dimen/score_item_height">
+
+    <TextView
+        android:id="@+id/name"
+        android:layout_width="0dp"
+        android:layout_weight="3"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="C语言程序设计"
+        android:textSize="@dimen/score_item_size"/>
+
+    <TextView
+        android:id="@+id/score"
+        android:layout_width="0dp"
+        android:layout_weight="2"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:gravity="center"
+        android:text="100"
+        android:textSize="@dimen/score_item_size"/>
+
+</LinearLayout>

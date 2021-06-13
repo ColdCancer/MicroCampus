@@ -151,7 +151,7 @@ public class HomeFragment extends Fragment {
             public void onRefresh() {
                 if (mainViewModel.checkLogin()) {
                     dataService.updataLessonByWeek(select_item + 1);
-                    mainViewModel.setLessons(dataService.getShceduleByWeek(select_item + 1));
+                    mainViewModel.setLessons(dataService.getShceduleByWeek(select_item));
                     Toast.makeText(getActivity(), "该周课程信息刷新成功!", Toast.LENGTH_SHORT).show();
                 } else {
                     Toast.makeText(getActivity(), "请先登录账号、密码！", Toast.LENGTH_SHORT).show();
@@ -172,8 +172,8 @@ public class HomeFragment extends Fragment {
         // now_week 从开始周次（第 0 周开始）到现在为第几周
         now_week = (int)((now.getTime() - startDate.getTime()) / DAY) / ITEM_DAY;
         // now_day 现在为星期几（0 代表星期一，以此类推）
-        now_day = now.getDay() - 1;
-        Log.i("debug", " " + now_day);
+        now_day = (now.getDay() + 6) % 7; // 7->0, 1->1
+//        Log.i("debug", " " + now_day);
         // 选择 now_week 周为默认显示的周
         schedule_option.setSelection(now_week);
     }

@@ -14,4 +14,5 @@ public interface DataService {
     void deleteAllInformation();
     void closeDB();
     void updataLessonByWeek(int week);
+    List<Map<String, Object>> getScoresBySemester(int semester);
 }

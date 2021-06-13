@@ -4,10 +4,14 @@ import android.content.ContentValues;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.util.Log;
+import android.widget.LinearLayout;
 
 import com.example.microcampus.demo.bean.Lesson;
+import com.example.microcampus.demo.bean.Score;
 import com.example.microcampus.demo.dao.LessonDAO;
+import com.example.microcampus.demo.dao.ScoreDAO;
 import com.example.microcampus.demo.dao.impl.LessonDAOImpl;
+import com.example.microcampus.demo.dao.impl.ScoreDAOImpl;
 import com.example.microcampus.demo.service.DataService;
 import com.example.microcampus.demo.util.DatabaseHelper;
 
@@ -20,19 +24,54 @@ import java.util.Random;
 
 public class DataServiceImpl implements DataService {
     private LessonDAO lessonDAO;
+    private ScoreDAO scoreDAO;
 
-    private final String[] palces = {"教-525(濂溪)", "教-423(濂溪)", "实-510 Windows Phone实训室(濂溪)"};
-    private final String[] teachers = {"吕嘉言", "埃迪", "住户平", "立业", "曹辉", "玉峰"};
+    private final String[] palces = {"教-525(濂溪)", "教-423(濂溪)", "教-135(濂溪)", "实-510 Windows Phone实训室(濂溪)",
+                    "实-505 嵌入式MCU开发实训室(濂溪)", "实-612 前端开发实训室(濂溪)"};
+    private final String[] teachers = {"张伟", "王芳", "王秀英", "李娜", "王静", "李强", "李军", "王磊",
+                    "李敏", "刘洋", "张杰", "王超", "李霞", "王平", "王刚", "李桂英"};
     private final String[] attributes = {"选修课", "必修课"};
-    private final String[] names = {"大数据可视化技术", "移动应用开发"};
+    private final String[] names = {"大数据可视化技术", "移动应用开发", "C语言程序设计", "Java课程设计",
+                    "电工电子设计性实验", "编译原理", "数据结构", " 数字电路", "操作系统原理", "计算机网络",
+                    "数据库原理与应用", "算法设计", "人工智能AI", "Linux系统及应用", "软件工程", " WEB开发技术",
+                    "Python网络爬虫", "JavaWeb应用开发"};
 
     public DataServiceImpl(Context context) {
         lessonDAO = new LessonDAOImpl(context);
+        scoreDAO = new ScoreDAOImpl(context);
     }
 
     @Override
     public boolean login(String username, String password) {
         return "student".equals(username) && "student".equals(password);
+    }
+
+    @Override
+    public List<Map<String, Object>> getScoresBySemester(int semester) {
+        List<Map<String, Object>> data = new ArrayList<>();
+        int startYear, endYear, term;
+
+        if (semester == 1 || semester == 2) {
+            startYear = 2016;
+            endYear = 2017;
+        } else if (semester == 3 || semester == 4) {
+            startYear = 2018;
+            endYear = 2019;
+        } else {
+            startYear = 2020;
+            endYear = 2021;
+        }
+        term = (semester + 1) % 2 + 1;
+
+        List<Score> scores = scoreDAO.SelectScores(startYear, endYear, term);
+        for (int i = 0; i < scores.size(); i++) {
+            Score score = scores.get(i);
+            Map<String, Object> item = new HashMap<>();
+            item.put("name", score.getLessonName());
+            item.put("score", score.getLessonScore());
+            data.add(item);
+        }
+        return data;
     }
 
     @Override
@@ -47,6 +86,7 @@ public class DataServiceImpl implements DataService {
     @Override
     public void closeDB() {
         lessonDAO.close();
+        scoreDAO.close();
     }
 
     @Override
@@ -58,6 +98,7 @@ public class DataServiceImpl implements DataService {
     @Override
     public void deleteAllInformation() {
         lessonDAO.deletaLessons();
+        scoreDAO.deleteLessons();
     }
 
     @Override
@@ -66,6 +107,28 @@ public class DataServiceImpl implements DataService {
             List<Lesson> lessons = randomGeneration(i);
             lessonDAO.insertLessons(lessons);
         }
+        for (int startYear = 2016; startYear <= 2020; startYear += 2) {
+            int endYear = startYear + 1;
+            for (int term = 1; term <= 2; term++) {
+                List<Score> scores = randomSemester(startYear, endYear, term);
+                scoreDAO.insertScores(scores);
+            }
+        }
+    }
+
+    private List<Score> randomSemester(int startYear, int endYear, int term) {
+        List<Score> scores = new ArrayList<>();
+        Random random = new Random();
+        int index = 0;
+        while(true) {
+            index += random.nextInt(3) + 1;
+            if (names.length <= index) break;;
+            String name = names[index];
+            float value = random.nextFloat() * 100;
+            Score score = new Score(startYear, endYear, term, name, value);
+            scores.add(score);
+        }
+        return scores;
     }
 
     private List<Lesson> randomGeneration(int week) {

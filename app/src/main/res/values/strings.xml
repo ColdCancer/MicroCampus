@@ -49,6 +49,16 @@
         <item>第二十周</item>
     </string-array>
 
+    <string-array name="array_semester">
+        <item>请选择带查询成绩的学期</item>
+        <item>2016–2017 学年 第 一 学期</item>
+        <item>2016–2017 学年 第 二 学期</item>
+        <item>2018–2019 学年 第 一 学期</item>
+        <item>2018–2019 学年 第 二 学期</item>
+        <item>2020–2021 学年 第 一 学期</item>
+        <item>2020–2021 学年 第 二 学期</item>
+    </string-array>
+
     <string name="week_tip">请选择课程周</string>
 
 </resources>
