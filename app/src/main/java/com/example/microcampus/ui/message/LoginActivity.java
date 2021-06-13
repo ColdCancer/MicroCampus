@@ -33,6 +33,7 @@ public class LoginActivity extends AppCompatActivity {
         initVar();
 
         if (sharedHander.getBoolean("remember")) {
+            dataService.deleteAllInformation();
             username.setText(sharedHander.getString("account"));
             password.requestFocus();
         }

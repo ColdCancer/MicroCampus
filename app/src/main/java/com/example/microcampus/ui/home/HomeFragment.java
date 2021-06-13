@@ -150,7 +150,7 @@ public class HomeFragment extends Fragment {
             @Override
             public void onRefresh() {
                 if (mainViewModel.checkLogin()) {
-                    dataService.updataLessonByWeek(select_item + 1);
+                    dataService.updataLessonByWeek(select_item);
                     mainViewModel.setLessons(dataService.getShceduleByWeek(select_item));
                     Toast.makeText(getActivity(), "该周课程信息刷新成功!", Toast.LENGTH_SHORT).show();
                 } else {

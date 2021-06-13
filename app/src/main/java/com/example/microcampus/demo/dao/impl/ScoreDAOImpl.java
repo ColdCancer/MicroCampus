@@ -5,6 +5,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
+import android.util.Log;
 
 import com.example.microcampus.demo.bean.Lesson;
 import com.example.microcampus.demo.bean.Score;
@@ -25,6 +26,7 @@ public class ScoreDAOImpl implements ScoreDAO {
 
     @Override
     public void deleteLessons() {
+        Log.i("debug", "adfadsf");
         String delete_lessons = "delete from " + TABLE_NAME;
         db.execSQL(delete_lessons);
     }

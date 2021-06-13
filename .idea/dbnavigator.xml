@@ -25,21 +25,25 @@
     <autoscroll-from-editor value="true" />
     <show-object-properties value="true" />
     <loaded-nodes>
-      <connection connection-id="1f4aab04-c106-4dcb-b0ca-51d6b4ba7dc6">
+      <connection connection-id="2e02ac4d-a8e1-4f58-88f9-c9cd294b8097">
         <schema name="main" object-types="table, view, constraint, index, column, dataset trigger" />
       </connection>
     </loaded-nodes>
   </component>
   <component name="DBNavigator.Project.DatabaseConsoleManager">
-    <connection id="1f4aab04-c106-4dcb-b0ca-51d6b4ba7dc6">
-      <console name="Connection" type="STANDARD" schema="main" session="Main"><![CDATA[select * from lesson;]]></console>
+    <connection id="2e02ac4d-a8e1-4f58-88f9-c9cd294b8097">
+      <console name="Connection" type="STANDARD" schema="main" session="Main" />
     </connection>
   </component>
   <component name="DBNavigator.Project.DatabaseFileManager">
     <open-files />
   </component>
   <component name="DBNavigator.Project.DatabaseSessionManager">
-    <connection id="1f4aab04-c106-4dcb-b0ca-51d6b4ba7dc6" />
+    <connection id="2e02ac4d-a8e1-4f58-88f9-c9cd294b8097" />
+  </component>
+  <component name="DBNavigator.Project.DatasetFilterManager">
+    <filter-actions connection-id="2e02ac4d-a8e1-4f58-88f9-c9cd294b8097" dataset="main.score" active-filter-id="EMPTY_FILTER" />
+    <filter-actions connection-id="2e02ac4d-a8e1-4f58-88f9-c9cd294b8097" dataset="main.lesson" active-filter-id="EMPTY_FILTER" />
   </component>
   <component name="DBNavigator.Project.EditorStateManager">
     <last-used-providers />
@@ -67,7 +71,7 @@
   </component>
   <component name="DBNavigator.Project.Settings">
     <connections>
-      <connection id="1f4aab04-c106-4dcb-b0ca-51d6b4ba7dc6" active="true">
+      <connection id="2e02ac4d-a8e1-4f58-88f9-c9cd294b8097" active="true">
         <database>
           <name value="Connection" />
           <description value="" />
