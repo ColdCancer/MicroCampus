@@ -61,6 +61,15 @@
             android:gravity="center"/>
 
         <Button
+            android:id="@+id/update"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="@dimen/message_item_interval"
+            android:layout_marginHorizontal="@dimen/message_button_margin"
+            android:text="更新所有信息"
+            android:textSize="@dimen/message_button_size"/>
+
+        <Button
             android:id="@+id/logout"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"

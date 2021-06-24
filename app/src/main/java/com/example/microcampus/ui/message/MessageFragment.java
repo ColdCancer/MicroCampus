@@ -31,7 +31,7 @@ public class MessageFragment extends Fragment {
     private SharedHander sharedHander;
 
     private View root;
-    private Button login, logout;
+    private Button login, logout, update;
     private LinearLayout message_content;
     private TextView message_name, message_account, message_college;
 
@@ -83,6 +83,15 @@ public class MessageFragment extends Fragment {
             }
         });
 
+        update.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                dataService.deleteAllInformation();
+                dataService.updataAllInformation();
+                Toast.makeText(getContext(), "信息更新完成！", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return root;
     }
 
@@ -119,6 +128,7 @@ public class MessageFragment extends Fragment {
 
         login = root.findViewById(R.id.login);
         logout = root.findViewById(R.id.logout);
+        update = root.findViewById(R.id.update);
         message_content = root.findViewById(R.id.message_content);
         message_name = root.findViewById(R.id.message_name);
         message_account = root.findViewById(R.id.message_account);
